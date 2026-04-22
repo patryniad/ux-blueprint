@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Volvo Group · DxD · Design Blueprint</title>
+<style>
+/* VGDS: Volvo Novum typeface from cdn.designsystem.volvogroup.com */
+@font-face{font-family:"Volvo Novum";src:url("https://cdn.designsystem.volvogroup.com/2-4-0/fonts/volvo-novum/VolvoNovum3-Light.woff2");font-display:swap;font-weight:200}
+@font-face{font-family:"Volvo Novum";src:url("https://cdn.designsystem.volvogroup.com/2-4-0/fonts/volvo-novum/VolvoNovum3-SemiLight.woff2");font-display:swap;font-weight:300}
+@font-face{font-family:"Volvo Novum";src:url("https://cdn.designsystem.volvogroup.com/2-4-0/fonts/volvo-novum/VolvoNovum3-Regular.woff2");font-display:swap;font-weight:400}
+@font-face{font-family:"Volvo Novum";src:url("https://cdn.designsystem.volvogroup.com/2-4-0/fonts/volvo-novum/VolvoNovum3-Bold.woff2");font-display:swap;font-weight:700}
+</style>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;--bg2:#fafafa;--bg3:#f5f5f5;--bg4:#ebebeb;--bg5:#e0e0e0;
+  --brd:#e1e1e1;--brd2:#c8c8c8;--brd3:#a9a9a9;
+  --txt:#212121;--txt2:#575757;--txt3:#6b6b6b;
+  --acc:#2a609d;
+  --ai-t:#2a609d;--ai-s:#d5e6ff;--ai-b:#bfd6ff;
+  --hu-t:#a06000;--hu-s:rgba(176,107,16,.14);--hu-b:rgba(176,107,16,.22);
+  --jm:#177844;--jm-s:#d8efde;--jm-b:#b0e0c0;
+  --okr-p:#2563eb;--okr-ps:rgba(91,143,249,.14);--okr-pb:rgba(91,143,249,.3);
+  --okr-j:#177844;--okr-js:rgba(78,205,180,.14);--okr-jb:rgba(78,205,180,.3);
+  --okr-g:#9a6400;--okr-gs:rgba(240,168,74,.14);--okr-gb:rgba(240,168,74,.3);
+  --for-or:#6b3fa0;--for-ors:rgba(176,122,255,.12);
+  --for-arch:#2563eb;--for-archs:rgba(91,143,249,.12);
+  --di-u:#2a609d;--di-us:#d5e6ff;--di-ub:#bfd6ff;
+  --di-c:#a05010;--di-cs:#ffe8cc;--di-cb:#ffd0a0;
+  --di-df:#1a7a66;--di-dfs:rgba(42,171,148,.13);--di-dfb:rgba(42,171,148,.3);
+  --di-dv:#4a9020;--di-dvs:rgba(74,144,32,.13);--di-dvb:rgba(74,144,32,.3);
+  --di-g:#8a4adf;--di-gs:rgba(138,74,223,.13);--di-gb:rgba(138,74,223,.3);
+  --tl-llm:#1e4a8c;--tl-llm-t:#ffffff;
+  --tl-res:#0a4a3a;--tl-res-t:#ffffff;
+  --tl-des:#5a1a0a;--tl-des-t:#ffffff;
+  --tl-dev:#1a3a0a;--tl-dev-t:#ffffff;
+  --tl-ana:#4a3200;--tl-ana-t:#ffffff;
+  --tl-col:#2a1a4a;--tl-col-t:#ffffff;
+}
+html{height:100%;background:var(--bg)}
+body{height:100%;background:var(--bg);color:var(--txt);font-family:'Volvo Novum',sans-serif;overflow:hidden;display:flex;flex-direction:column}
+vcdk-theme-provider{display:flex;flex-direction:column;flex:1;height:100%;overflow:hidden;min-height:0}
+
+/* ─── HEADER ─── */
+header{flex-shrink:0;padding:12px 20px 9px;border-bottom:1px solid var(--brd);background:var(--bg)}
+.hd-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:9px;gap:14px}
+.hd-logo{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.hd-org{font-size:11.5px;color:var(--txt3);letter-spacing:.1em;text-transform:uppercase;font-family:'Volvo Novum',sans-serif}
+.hd-title{font-size:13px;font-weight:600;color:var(--txt);letter-spacing:-.02em}
+.hd-sub{font-size:12.5px;color:var(--txt3);margin-top:1px}
+.hd-meta{text-align:right;font-size:11.5px;color:var(--txt3);font-family:'Volvo Novum',sans-serif;line-height:1.7}
+.hd-controls{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.ctrl-label{font-size:11.5px;color:var(--txt3);letter-spacing:.08em;text-transform:uppercase;font-family:'Volvo Novum',sans-serif}
+.pill{font-size:12.5px;padding:3px 8px;border-radius:20px;border:1px solid var(--brd2);background:transparent;color:var(--txt2);cursor:pointer;transition:all .12s;white-space:nowrap;font-family:'Volvo Novum',sans-serif}
+.pill:hover{background:var(--bg4);color:var(--txt)}
+.pill.on{background:var(--bg4);border-color:var(--acc);color:var(--ai-t)}
+.pill.on-p{background:var(--okr-ps);border-color:var(--okr-pb);color:var(--okr-p)}
+.pill.on-j{background:var(--okr-js);border-color:var(--okr-jb);color:var(--okr-j)}
+.pill.on-g{background:var(--okr-gs);border-color:var(--okr-gb);color:var(--okr-g)}
+.sep{width:1px;height:13px;background:var(--brd);flex-shrink:0}
+.hd-hint{font-size:11.5px;color:var(--txt3);font-family:'Volvo Novum',sans-serif;margin-left:auto}
+
+/* ─── MATURITY BAR ─── */
+
+
+
+
+
+/* ─── SCROLL AREA ─── */
+.scroll-wrap{flex:1;overflow:hidden;display:flex;flex-direction:column;min-height:0}
+.track-scroll{flex:1;overflow-x:auto;overflow-y:auto;padding:12px 20px 16px;-webkit-overflow-scrolling:touch}
+.track-scroll::-webkit-scrollbar{height:4px;width:4px}
+.track-scroll::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:2px}
+
+/* ─── JOURNEY THREAD ─── */
+.jb-header{display:flex;align-items:center;gap:8px;margin-bottom:6px;width:max-content;min-width:100%}
+.jb-label{font-size:11.5px;color:var(--jm);letter-spacing:.1em;text-transform:uppercase;font-family:'Volvo Novum',sans-serif;display:flex;align-items:center;gap:5px}
+.jb-dot{width:6px;height:6px;border-radius:50%;background:var(--jm);flex-shrink:0}
+.jb-forums-key{display:flex;gap:5px;margin-left:auto}
+.jb-fk{font-size:11px;padding:2px 5px;border-radius:2px;font-family:'Volvo Novum',sans-serif}
+.jb-fk.or{background:var(--for-ors);color:var(--for-or)}
+.jb-fk.arch{background:var(--for-archs);color:var(--for-arch)}
+.jb-row{display:flex;align-items:flex-start;width:max-content;padding-bottom:8px}
+.jt-node{flex-shrink:0;padding:7px 9px;background:var(--jm-s);border:1px solid var(--jm-b);border-radius:8px;cursor:pointer;transition:all .15s;display:flex;flex-direction:column;gap:2px;min-height:52px}
+.jt-node:hover{background:rgba(78,205,180,.13);border-color:var(--jm)}
+.jt-node.sel{border-color:var(--jm);background:rgba(78,205,180,.14);box-shadow:0 0 0 1px var(--jm)}
+.jt-node.has-forum{border-color:#2a7a5a}
+.jt-act{font-size:13px;color:var(--jm);font-weight:500;line-height:1.3}
+.jt-art{font-size:11px;color:#2a6a50;line-height:1.3;font-family:'Volvo Novum',sans-serif}
+.jt-forums{display:flex;gap:2px;margin-top:3px}
+.jt-f{font-size:11px;padding:1px 4px;border-radius:2px;font-family:'Volvo Novum',sans-serif;font-weight:500}
+.jt-f.or{background:var(--for-ors);color:var(--for-or)}
+.jt-f.arch{background:var(--for-archs);color:var(--for-arch)}
+.jt-conn{width:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--jm);font-size:13px;opacity:.3;align-self:center}
+/* ─── AI CONTEXT LAYER ─── */
+.ai-ctx-wrap{margin-bottom:0}
+.ai-ctx-header{display:flex;align-items:center;gap:8px;margin-bottom:6px;width:max-content;min-width:100%}
+.ai-ctx-label{font-size:11.5px;color:#2563eb;letter-spacing:.1em;text-transform:uppercase;font-family:'Volvo Novum',sans-serif;display:flex;align-items:center;gap:5px}
+.ai-ctx-dot{width:6px;height:6px;border-radius:50%;background:#2563eb;flex-shrink:0}
+.ai-ctx-row{display:flex;align-items:flex-start;width:max-content;padding-bottom:8px}
+.ai-ctx-node{flex-shrink:0;padding:7px 9px;background:rgba(59,111,232,.07);border:1px solid rgba(59,111,232,.2);border-radius:8px;cursor:pointer;transition:all .15s;display:flex;flex-direction:column;gap:2px;min-height:62px}
+.ai-ctx-node:hover{background:rgba(59,111,232,.13);border-color:rgba(59,111,232,.4)}
+.ai-ctx-title{font-size:13px;color:#2563eb;font-weight:500;line-height:1.3}
+.ai-ctx-items{font-size:11px;color:#3a6090;line-height:1.5;font-family:'Volvo Novum',sans-serif}
+.ai-ctx-out{font-size:11px;color:#4a6a8a;line-height:1.3;font-family:'Volvo Novum',sans-serif;margin-top:3px;font-style:italic}
+.ai-ctx-conn{width:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#2563eb;font-size:13px;opacity:.4;align-self:center}
+.ai-ctx-transition{flex-shrink:0;width:64px;padding:5px 6px;background:rgba(59,111,232,.04);border:1px dashed rgba(59,111,232,.2);border-radius:6px;align-self:center;margin:0 2px}
+.ai-ctx-trans-label{font-size:11px;color:#2563eb;font-weight:600;font-family:'Volvo Novum',sans-serif;text-align:center;line-height:1.3}
+.ai-ctx-trans-desc{font-size:11px;color:#4a6a8a;font-family:'Volvo Novum',sans-serif;text-align:center;line-height:1.3;margin-top:2px}
+
+
+/* ─── DIAMOND TRACK ─── */
+.track{display:flex;align-items:flex-start;width:max-content;padding-bottom:4px}
+.ph-arrow{width:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--txt3);font-size:13px;align-self:center;margin-bottom:6px}
+.ph{flex-shrink:0;width:230px;border:1px solid var(--brd);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .2s}
+.ph:hover{border-color:var(--brd2);transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.ph.sel{box-shadow:0 0 0 1px var(--acc)}
+.ph.dim{opacity:.15;pointer-events:none}
+.ph.u{border-top:3px solid var(--di-u)}.ph.u.sel{border-color:var(--di-u)}
+.ph.c{border-top:3px solid var(--di-c)}.ph.c.sel{border-color:var(--di-c)}
+.ph.df{border-top:3px solid var(--di-df);width:200px}.ph.df.sel{border-color:var(--di-df)}
+.ph.dv{border-top:3px solid var(--di-dv)}.ph.dv.sel{border-color:var(--di-dv)}
+.ph.g{border-top:3px solid var(--di-g)}.ph.g.sel{border-color:var(--di-g)}
+
+.ph-head{background:var(--bg3);padding:10px 12px;border-bottom:1px solid var(--brd)}
+.ph-badge{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-family:'Volvo Novum',sans-serif;padding:2px 6px;border-radius:2px;margin-bottom:5px;display:inline-block}
+.u .ph-badge{background:var(--di-us);color:var(--di-u)}
+.c .ph-badge{background:var(--di-cs);color:var(--di-c)}
+.df .ph-badge{background:var(--di-dfs);color:var(--di-df)}
+.dv .ph-badge{background:var(--di-dvs);color:var(--di-dv)}
+.g .ph-badge{background:var(--di-gs);color:var(--di-g)}
+.ph-name{font-size:14px;font-weight:600;color:var(--txt);margin-bottom:2px;line-height:1.3}
+.ph-sub{font-size:11.5px;color:var(--txt2);margin-bottom:6px;line-height:1.4}
+.ph-bal{height:2px;border-radius:1px;overflow:hidden;display:flex;margin-bottom:5px}
+.ph-bal-ai{opacity:.7}
+.u .ph-bal-ai{background:var(--di-u)}.c .ph-bal-ai{background:var(--di-c)}
+.df .ph-bal-ai{background:var(--di-df)}.dv .ph-bal-ai{background:var(--di-dv)}.g .ph-bal-ai{background:var(--di-g)}
+.ph-bal-hu{background:var(--hu-t);opacity:.4}
+.ph-stk{display:flex;align-items:center;gap:3px;margin-bottom:4px}
+.stk-label{font-size:11px;color:var(--txt3);font-family:'Volvo Novum',sans-serif}
+.stk-dot{width:5px;height:5px;border-radius:50%;background:var(--hu-t);opacity:.7}
+.stk-dot.lo{opacity:.1}
+.okr-tags{display:flex;gap:2px;flex-wrap:wrap;margin-bottom:4px}
+.okr-tag{font-size:10px;padding:1px 4px;border-radius:2px;font-family:'Volvo Novum',sans-serif;font-weight:600}
+.okr-tag.p{background:var(--okr-ps);color:var(--okr-p);border:1px solid var(--okr-pb)}
+.okr-tag.j{background:var(--okr-js);color:var(--okr-j);border:1px solid var(--okr-jb)}
+.okr-tag.g{background:var(--okr-gs);color:var(--okr-g);border:1px solid var(--okr-gb)}
+.ph-sub-phases{padding:8px 10px;display:flex;flex-direction:column;gap:3px;background:var(--bg2)}
+.ph-sp-label{font-size:11px;color:var(--txt3);letter-spacing:.08em;text-transform:uppercase;font-family:'Volvo Novum',sans-serif;margin-bottom:3px}
+.ph-sp-chip{font-size:12.5px;color:var(--txt2);padding:3px 7px;border-radius:4px;border:1px solid var(--brd);display:flex;align-items:center;gap:5px;transition:all .12s;cursor:pointer}
+.ph-sp-chip:hover{border-color:var(--brd2);background:var(--bg4);color:var(--txt)}
+.ph-sp-n{font-size:11px;color:var(--txt3);font-family:'Volvo Novum',sans-serif;min-width:14px}
+.ph-sp-chip .ai-dot{width:4px;height:4px;border-radius:50%;margin-left:auto;flex-shrink:0;opacity:.6}
+.ph-hint{font-size:11.5px;color:var(--txt3);padding:6px 10px;text-align:center;font-family:'Volvo Novum',sans-serif}
+.role-ai .ph-section.hu-s{opacity:.1}
+.role-hu .ph-section.ai-s{opacity:.1}
+
+/* ─── RIGHT DRAWER ─── */
+.drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9998;opacity:0;pointer-events:none;transition:opacity .22s ease}
+.drawer-backdrop.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;width:680px;max-width:95vw;height:100vh;background:var(--bg2);border-left:1px solid var(--brd2);z-index:9999;transform:translateX(102%);transition:transform .26s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow:hidden;will-change:transform;isolation:isolate}
+.drawer.open{transform:translateX(0)}
+
+/* DRAWER HEADER */
+.dr-head{background:var(--bg3);padding:16px 24px 14px;border-bottom:1px solid var(--brd);flex-shrink:0}
+.dr-breadcrumb{display:flex;align-items:center;width:100%;gap:6px;margin-bottom:6px;min-height:22px}
+.dr-back{background:transparent;border:1px solid var(--brd2);color:var(--txt2);cursor:pointer;padding:2px 8px;border-radius:3px;font-size:12.5px;font-family:'Volvo Novum',sans-serif;transition:all .12s;display:none}
+.dr-back:hover{background:var(--bg4);color:var(--txt)}
+.dr-back.vis{display:inline-block}
+.dr-crumb{font-size:12.5px;color:var(--txt3);font-family:'Volvo Novum',sans-serif;display:flex;align-items:center;gap:5px}
+.dr-crumb-sep{opacity:.3}
+.dr-head-main{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.dr-badge{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-family:'Volvo Novum',sans-serif;padding:2px 7px;border-radius:3px;margin-bottom:4px;display:inline-block}
+.dr-name{font-size:16px;font-weight:700;color:var(--txt);letter-spacing:-.02em;line-height:1.2;margin-bottom:3px}
+.dr-sub-txt{font-size:14px;color:var(--txt2);margin-bottom:7px}
+.dr-meta{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.dr-okr{font-size:11.5px;padding:2px 6px;border-radius:2px;font-family:'Volvo Novum',sans-serif;font-weight:600}
+.dr-okr.p{background:var(--okr-ps);color:var(--okr-p);border:1px solid var(--okr-pb)}
+.dr-okr.j{background:var(--okr-js);color:var(--okr-j);border:1px solid var(--okr-jb)}
+.dr-okr.g{background:var(--okr-gs);color:var(--okr-g);border:1px solid var(--okr-gb)}
+.dr-ai-pct{font-size:12.5px;color:var(--txt3);font-family:'Volvo Novum',sans-serif}
+.dr-close{background:transparent;border:1px solid var(--brd2);color:var(--txt2);cursor:pointer;width:28px;height:28px;border-radius:50%;font-size:14px;line-height:28px;text-align:center;flex-shrink:0;transition:all .12s}
+.dr-close:hover{background:var(--bg4);color:var(--txt)}
+
+.dr-scroll{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.dr-scroll::-webkit-scrollbar{width:3px}
+.dr-scroll::-webkit-scrollbar-thumb{background:var(--bg4)}
+
+/* DRAWER VIEWS */
+.dr-view{display:none}
+.dr-view.vis{display:block;min-height:0}
+
+/* DIAMOND OVERVIEW VIEW */
+.dr-overview-intro{padding:16px 24px;border-bottom:1px solid var(--brd);font-size:14px;color:var(--txt2);line-height:1.6}
+.dr-sp-track{padding:16px 24px;border-bottom:1px solid var(--brd)}
+.dr-sp-track-label{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-family:'Volvo Novum',sans-serif;color:var(--txt3);margin-bottom:10px}
+.dr-sp-cards{display:flex;flex-direction:column;gap:10px}
+.dr-sp-card{border:1px solid var(--brd);border-radius:var(--r,8px);background:var(--bg3);cursor:pointer;transition:all .18s;overflow:hidden}
+.dr-sp-card:hover{border-color:var(--brd2);background:var(--bg4);transform:translateX(3px)}
+.dr-sp-card-inner{display:flex;align-items:center;gap:12px;padding:12px 16px}
+.dr-sp-card-left{flex:1;min-width:0}
+.dr-sp-num{font-size:11.5px;color:var(--txt3);font-family:'Volvo Novum',sans-serif;letter-spacing:.06em;margin-bottom:2px}
+.dr-sp-name{font-size:14px;font-weight:600;color:var(--txt);margin-bottom:1px}
+.dr-sp-desc{font-size:13px;color:var(--txt2)}
+.dr-sp-card-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
+.dr-sp-bal{display:flex;height:3px;width:60px;border-radius:2px;overflow:hidden}
+.dr-sp-ai{opacity:.7}
+.dr-sp-hu{background:var(--hu-t);opacity:.4}
+.dr-sp-pct{font-size:11.5px;color:var(--txt3);font-family:'Volvo Novum',sans-serif}
+.dr-sp-chips{display:flex;gap:2px;flex-wrap:wrap;justify-content:flex-end}
+.dr-sp-tool{font-size:11px;padding:1px 4px;border-radius:2px;font-family:'Volvo Novum',sans-serif}
+.dr-sp-arrow{font-size:14px;color:var(--txt3);opacity:.4;flex-shrink:0}
+
+/* TBU in overview */
+.dr-tbu-section{padding:16px 24px;border-bottom:1px solid var(--brd)}
+.dr-tbu-label{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-family:'Volvo Novum',sans-serif;color:var(--txt3);margin-bottom:8px}
+.dr-tbu-row{display:flex;gap:5px}
+.dr-tbu-card{flex:1;padding:7px 9px;border-radius:6px;border:1px solid var(--brd)}
+.dr-tbu-card.active{background:var(--ai-s);border-color:var(--ai-b)}
+.dr-tbu-card.secondary{border-color:var(--brd2);opacity:.6}
+.dr-tbu-n{font-size:11.5px;font-weight:600;font-family:'Volvo Novum',sans-serif;margin-bottom:2px}
+.active .dr-tbu-n{color:var(--ai-t)}.secondary .dr-tbu-n,.dr-tbu-card:not(.active):not(.secondary) .dr-tbu-n{color:var(--txt3)}
+.dr-tbu-card:not(.active):not(.secondary){opacity:.25}
+.dr-tbu-d{font-size:12.5px;color:var(--txt2);line-height:1.45}
+
+/* JOURNEY OVERVIEW in diamond */
+.dr-jm-overview{padding:16px 24px;background:var(--jm-s);border-top:1px solid var(--jm-b)}
+.dr-jm-title{font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-family:'Volvo Novum',sans-serif;color:var(--jm);margin-bottom:7px}
+.dr-jm-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dr-jm-lbl{font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-family:'Volvo Novum',sans-serif;color:#2a7a5a;margin-bottom:3px}
+.dr-jm-val{font-size:13px;color:#177844;line-height:1.5;font-family:'Volvo Novum',sans-serif}
+.dr-jm-activity{font-size:14px;color:var(--jm);font-weight:500;margin-bottom:4px}
+.dr-forums{display:flex;flex-direction:column;gap:4px}
+.dr-fi{display:flex;gap:6px;align-items:flex-start;padding:5px 7px;border-radius:4px}
+.dr-fi.or{background:var(--for-ors)}.dr-fi.arch{background:var(--for-archs)}
+.dr-fb{font-size:11px;padding:2px 4px;border-radius:2px;font-family:'Volvo Novum',sans-serif;font-weight:600;flex-shrink:0}
+.or .dr-fb{color:var(--for-or)}.arch .dr-fb{color:var(--for-arch)}
+.dr-fd{font-size:13px;color:var(--txt2);line-height:1.35}
+.dr-no-forum{font-size:13px;color:var(--txt3);font-style:italic}
+
+/* SUB-PHASE DETAIL VIEW */
+.dr-detail-cols{display:grid;grid-template-columns:1fr 1fr}
+.dr-col{padding:16px 24px}
+.dr-col.ai-col{background:var(--ai-s);border-right:1px solid var(--brd)}
+.dr-col.hu-col{background:var(--hu-s)}
+.dr-col-hd{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-family:'Volvo Novum',sans-serif;font-weight:500;margin-bottom:10px}
+.ai-col .dr-col-hd{color:var(--ai-t)}.hu-col .dr-col-hd{color:var(--hu-t)}
+.dr-task{font-size:14px;line-height:1.5;padding:5px 0;border-bottom:1px solid rgba(0,0,0,.06);display:flex;gap:7px;align-items:flex-start}
+.dr-task:last-child{border-bottom:none}
+.dr-dot{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.5;flex-shrink:0;margin-top:5px}
+.ai-col .dr-task{color:var(--ai-t)}.hu-col .dr-task{color:var(--hu-t)}
+.dr-task-sub{font-size:12.5px;color:var(--txt3);margin-top:1px;line-height:1.4}
+.dr-sec-label{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-family:'Volvo Novum',sans-serif;color:var(--txt3);margin:11px 0 5px;border-top:1px solid rgba(0,0,0,.06);padding-top:9px}
+.dr-tool-row{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px solid rgba(0,0,0,.03)}
+.dr-tool-row:last-child{border-bottom:none}
+.dr-tc{font-size:11.5px;padding:2px 6px;border-radius:2px;font-family:'Volvo Novum',sans-serif;font-weight:500;white-space:nowrap;min-width:85px}
+.tc-llm{background:var(--tl-llm);color:var(--tl-llm-t)}
+.tc-res{background:var(--tl-res);color:var(--tl-res-t)}
+.tc-des{background:var(--tl-des);color:var(--tl-des-t)}
+.tc-dev{background:var(--tl-dev);color:var(--tl-dev-t)}
+.tc-ana{background:var(--tl-ana);color:var(--tl-ana-t)}
+.tc-col{background:var(--tl-col);color:var(--tl-col-t)}
+.dr-tool-desc{font-size:13px;color:var(--txt2);line-height:1.4}
+.dr-sk-grid{display:flex;flex-wrap:wrap;gap:3px}
+.dr-sk{font-size:12.5px;padding:2px 6px;border-radius:3px;background:rgba(176,107,16,.18);color:var(--hu-t);border:1px solid rgba(176,107,16,.22)}
+.dr-volvo-hd{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-family:'Volvo Novum',sans-serif;color:var(--txt3);margin:11px 0 5px;border-top:1px solid rgba(0,0,0,.06);padding-top:9px}
+.dr-mat-item{font-size:14px;color:var(--txt2);padding:4px 0;border-bottom:1px solid rgba(0,0,0,.03);line-height:1.4}
+.dr-mat-item:last-child{border-bottom:none}
+/* RECOMMENDED TOOLS */
+.dr-rec-tools{background:rgba(240,168,74,.07);border-top:1px solid rgba(240,168,74,.2);padding:16px 24px}
+.dr-rec-title{font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-family:'Volvo Novum',sans-serif;color:var(--hu-t);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.dr-rec-note{font-size:12.5px;color:var(--txt3);margin-bottom:9px;line-height:1.5;font-style:italic}
+.dr-rec-row{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid rgba(0,0,0,.03)}
+.dr-rec-row:last-child{border-bottom:none}
+.dr-rec-badge{font-size:11.5px;padding:2px 6px;border-radius:2px;background:rgba(240,168,74,.18);color:var(--hu-t);border:1px solid rgba(240,168,74,.25);font-family:'Volvo Novum',sans-serif;font-weight:500;white-space:nowrap;min-width:80px}
+.dr-rec-why{font-size:13px;color:var(--txt2);line-height:1.4}
+
+.dr-mat-badge{display:inline-block;font-size:11.5px;padding:1px 5px;border-radius:2px;font-family:'Volvo Novum',sans-serif;margin-right:4px;vertical-align:middle}
+
+/* SUB-PHASE DETAIL: Journey strip */
+.dr-detail-jm{background:var(--jm-s);border-top:1px solid var(--jm-b);padding:16px 24px}
+
+/* DRAWER NAV */
+.dr-nav-btn{font-size:13px;padding:4px 12px;border-radius:4px;border:1px solid var(--brd2);background:transparent;color:var(--txt2);cursor:pointer;font-family:'Volvo Novum',sans-serif;transition:all .12s}
+.dr-nav-btn:hover{background:var(--bg4);color:var(--txt)}
+.dr-nav-btn:disabled{opacity:.2;cursor:default}
+.dr-nav-pos{font-size:12.5px;color:var(--txt3);font-family:'Volvo Novum',sans-serif;text-align:center}
+
+/* LEGEND */
+.leg-strip{flex-shrink:0;border-top:1px solid var(--brd);padding:6px 20px;display:flex;align-items:center;gap:10px;background:var(--bg);overflow-x:auto}
+.leg-item{display:flex;align-items:center;gap:4px;white-space:nowrap}
+.leg-sq{width:8px;height:8px;border-radius:2px}
+.leg-bar{width:16px;height:3px;border-radius:1px}
+.leg-lbl{font-size:11.5px;color:var(--txt3);font-family:'Volvo Novum',sans-serif}
+
+@media(max-width:700px){
+  .drawer{width:100vw;max-width:100vw}
+  .dr-detail-cols{grid-template-columns:1fr}
+  .dr-col.ai-col{border-right:none;border-bottom:1px solid var(--brd)}
+  .dr-tbu-row{flex-direction:column}
+  .dr-jm-row{grid-template-columns:1fr}
+}
+
+/* AI Context Layer */
+.ai-ctx-header{flex-shrink:0;background:rgba(59,111,232,.06);border-bottom:1px solid rgba(59,111,232,.15);border-top:1px solid rgba(59,111,232,.15);padding:6px 20px;display:flex;align-items:center;gap:8px}
+.ai-ctx-dot{width:7px;height:7px;border-radius:50%;background:#3B6FE8;flex-shrink:0}
+.ai-ctx-label-text{font-size:11px;color:#2563eb;font-family:'Volvo Novum',sans-serif;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.ai-ctx-row{display:flex;align-items:flex-start;width:max-content;padding:4px 0 8px}
+.ai-ctx-node{flex-shrink:0;padding:7px 9px;background:rgba(59,111,232,.06);border:1px solid rgba(59,111,232,.18);border-radius:8px;cursor:pointer;transition:all .15s;display:flex;flex-direction:column;gap:3px}
+.ai-ctx-node:hover{background:rgba(59,111,232,.12);border-color:rgba(59,111,232,.35)}
+.ai-ctx-deposits{font-size:12px;color:#2563eb;font-family:'Volvo Novum',sans-serif;line-height:1.4;font-weight:500}
+.ai-ctx-draws{font-size:11.5px;color:#3a6090;font-family:'Volvo Novum',sans-serif;line-height:1.3;font-style:italic}
+.ai-ctx-conn{display:flex;align-items:center;justify-content:center;color:#3B6FE8;font-size:14px;padding:0 2px;align-self:center}
+.ai-ctx-bar{height:3px;background:rgba(59,111,232,.2);border-radius:2px;margin:0 20px 0;position:relative;overflow:visible}
+.ai-ctx-bar::after{content:'';position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,rgba(59,111,232,.4),rgba(59,111,232,.15));border-radius:2px;width:100%}
+/* AI Context Drawer section */
+.dr-ai-title{font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-family:'Volvo Novum',sans-serif;color:#2563eb;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.dr-ai-title::before{content:'';width:6px;height:6px;border-radius:50%;background:#3B6FE8;flex-shrink:0}
+.dr-ai-lbl{font-size:12px;color:#2563eb;font-family:'Volvo Novum',sans-serif;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px;margin-top:8px}
+.dr-ai-val{font-size:14px;color:#2563eb;line-height:1.5}
+.dr-ai-role{font-size:14px;color:rgba(0,0,0,.45);line-height:1.55;font-style:italic;background:rgba(59,111,232,.06);border-left:2px solid rgba(59,111,232,.3);padding:6px 8px;border-radius:0 4px 4px 0;margin-top:4px}
+.dr-ai-schema{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.dr-ai-schema-field{font-size:11.5px;padding:2px 6px;border-radius:3px;background:rgba(59,111,232,.1);color:#2563eb;font-family:'Volvo Novum',sans-serif;border:1px solid rgba(59,111,232,.2)}
+
+
+/* Methods & Toolbox */
+.dr-methods-section{border-top:1px solid rgba(0,0,0,.06);padding:12px 16px;background:var(--bg2)}
+.dr-methods-title{font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-family:'Volvo Novum',sans-serif;color:var(--txt3);margin-bottom:8px}
+.dr-methods-grid{display:flex;flex-wrap:wrap;gap:5px}
+.dr-method-chip{font-size:12.5px;padding:3px 9px;border-radius:4px;background:rgba(240,168,74,.08);color:#9a6400;border:1px solid rgba(240,168,74,.2);font-family:'Volvo Novum',sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:all .15s;cursor:pointer}
+.dr-method-chip:hover{background:rgba(240,168,74,.16);border-color:rgba(240,168,74,.4);color:#9a6400}
+.dr-method-chip.placeholder{opacity:.65;cursor:default}
+.dr-method-chip.placeholder::after{content:'↗';font-size:11.5px;opacity:.5}
+.dr-method-chip:not(.placeholder)::after{content:'↗';font-size:11.5px}
+
+
+/* AI Context Layer toggle */
+.ai-ctx-toggle{display:flex;align-items:center;gap:7px;cursor:pointer;user-select:none;margin-left:8px;padding:4px 10px 4px 8px;border-radius:6px;border:1px solid rgba(59,111,232,.25);background:rgba(59,111,232,.06);transition:all .15s}
+.ai-ctx-toggle:hover{background:rgba(59,111,232,.12);border-color:rgba(59,111,232,.4)}
+.ai-ctx-toggle input{position:absolute;opacity:0;width:0;height:0}
+.ai-ctx-toggle-track{position:relative;width:28px;height:16px;background:#e8e8e8;border-radius:8px;flex-shrink:0;transition:background .2s;border:1px solid rgba(0,0,0,.12)}
+.ai-ctx-toggle input:checked ~ .ai-ctx-toggle-track{background:#3B6FE8;border-color:#3B6FE8}
+.ai-ctx-toggle-thumb{position:absolute;top:2px;left:2px;width:10px;height:10px;background:#fff;border-radius:50%;transition:transform .2s;opacity:.7}
+.ai-ctx-toggle input:checked ~ .ai-ctx-toggle-track .ai-ctx-toggle-thumb{transform:translateX(12px);opacity:1}
+.ai-ctx-toggle-label{font-size:12.5px;color:#2563eb;font-family:'Volvo Novum',sans-serif;letter-spacing:.06em;text-transform:uppercase;font-weight:600;white-space:nowrap}
+.ai-ctx-toggle input:checked ~ .ai-ctx-toggle-track + .ai-ctx-toggle-label{color:#2563eb}
+
+
+/* Discipline filter */
+.disc-filter{display:flex;align-items:center;gap:4px}
+.disc-pill{font-size:11.5px;padding:2px 8px;border-radius:3px;cursor:pointer;border:1px solid;font-family:'Volvo Novum',sans-serif;font-weight:500;letter-spacing:.05em;transition:all .15s}
+.disc-pill.active{opacity:1}
+.disc-pill:not(.active){opacity:.45}
+.disc-pill-all{background:#f0f0f0;border-color:rgba(255,255,255,.2);color:var(--txt)}
+.disc-pill-all.active{background:#e8e8e8;border-color:rgba(0,0,0,.18);color:var(--txt)}
+.disc-pill-ux{background:rgba(59,111,232,.1);border-color:rgba(59,111,232,.25);color:#2563eb}
+.disc-pill-ux.active{background:rgba(59,111,232,.18);border-color:rgba(59,111,232,.5);color:#2563eb}
+.disc-pill-uxr{background:rgba(42,171,148,.1);border-color:rgba(42,171,148,.25);color:var(--jm)}
+.disc-pill-uxr.active{background:rgba(42,171,148,.18);border-color:rgba(42,171,148,.5);color:var(--jm)}
+.disc-pill-sd{background:rgba(240,168,56,.1);border-color:rgba(240,168,56,.25);color:var(--hu-t)}
+.disc-pill-sd.active{background:rgba(240,168,56,.18);border-color:rgba(240,168,56,.5);color:var(--hu-t)}
+/* Discipline badges on items */
+.disc-badge{display:inline-block;font-size:11px;padding:1px 5px;border-radius:2px;font-family:'Volvo Novum',sans-serif;font-weight:600;letter-spacing:.06em;margin-left:5px;vertical-align:middle;flex-shrink:0}
+.disc-badge-ux{background:rgba(59,111,232,.12);color:#2563eb;border:1px solid rgba(59,111,232,.2)}
+.disc-badge-uxr{background:rgba(42,171,148,.12);color:var(--jm);border:1px solid rgba(42,171,148,.2)}
+.disc-badge-sd{background:rgba(240,168,56,.12);color:var(--hu-t);border:1px solid rgba(240,168,56,.2)}
+.disc-hidden{display:none!important}
+
+
+/* Context track selector */
+.ctx-selector{flex-shrink:0;background:var(--bg3);border-bottom:1px solid var(--brd);padding:6px 20px;display:flex;align-items:center;gap:8px}
+.ctx-label{font-family:'Volvo Novum',sans-serif;font-size:11px;color:var(--txt3);letter-spacing:.12em;text-transform:uppercase;font-weight:500;white-space:nowrap}
+.ctx-track{display:flex;align-items:center;gap:4px}
+.ctx-pill{font-size:12.5px;padding:3px 10px;border-radius:4px;cursor:pointer;border:1px solid;font-family:'Volvo Novum',sans-serif;font-weight:500;letter-spacing:.04em;transition:all .15s;white-space:nowrap}
+.ctx-pill-new{background:rgba(91,124,250,.08);border-color:rgba(91,124,250,.2);color:#2563eb}
+.ctx-pill-new.ctx-active{background:rgba(91,124,250,.18);border-color:rgba(91,124,250,.5);color:#2563eb}
+.ctx-pill-cti{background:rgba(42,171,148,.08);border-color:rgba(42,171,148,.2);color:#177844}
+.ctx-pill-cti.ctx-active{background:rgba(42,171,148,.18);border-color:rgba(42,171,148,.5);color:var(--jm)}
+.ctx-pill-cbi{background:rgba(240,168,56,.08);border-color:rgba(240,168,56,.2);color:#9a6400}
+.ctx-pill-cbi.ctx-active{background:rgba(240,168,56,.18);border-color:rgba(240,168,56,.5);color:var(--hu-t)}
+/* Track context block in drawer TBU section */
+.dr-track-ctx{margin-top:10px;padding:8px 10px;border-radius:6px;font-size:14px;line-height:1.55;border-left:3px solid}
+.dr-track-ctx-label{font-family:'Volvo Novum',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;margin-bottom:4px}
+.dr-track-new{background:rgba(91,124,250,.07);border-color:rgba(91,124,250,.3)}
+.dr-track-new .dr-track-ctx-label{color:#2563eb}
+.dr-track-new p{color:#2563eb}
+.dr-track-cti{background:rgba(42,171,148,.07);border-color:rgba(42,171,148,.3)}
+.dr-track-cti .dr-track-ctx-label{color:var(--jm)}
+.dr-track-cti p{color:#177844}
+.dr-track-cbi{background:rgba(240,168,56,.07);border-color:rgba(240,168,56,.3)}
+.dr-track-cbi .dr-track-ctx-label{color:var(--hu-t)}
+.dr-track-cbi p{color:#9a6400}
+
+</style>
+<link rel="stylesheet" href="vgds-assets/typefaces.css">
+<link rel="stylesheet" href="vgds-assets/semantic-light.css">
+<script defer src="vgds-assets/vgds-bundle.js"></script>
+</head>
+<body>
+<vcdk-theme-provider theme-id="volvo-light">
+
+<header>
+  <div class="hd-top">
+    <div class="hd-logo">
+      <vcdk-logotype variant="volvo-spread-word-mark" height="18" style="flex-shrink:0"></vcdk-logotype>
+      <div>
+        <div class="hd-org">DxD Function</div>
+        <div class="hd-title">Design Process Blueprint</div>
+      </div>
+    </div>
+  </div>
+  <div class="hd-controls">
+    <div class="ctrl-label">Role</div>
+    <button class="pill on" onclick="setRole('all',this)" id="r-all">All</button>
+    <button class="pill" onclick="setRole('ai',this)" id="r-ai">AI-assisted</button>
+    <button class="pill" onclick="setRole('hu',this)" id="r-hu">Human-led</button>
+    <div class="sep"></div>
+    <div class="ctrl-label">OKR</div>
+    <button class="pill" id="okr-p" onclick="toggleOkr('p',this)">Practices</button>
+    <button class="pill" id="okr-j" onclick="toggleOkr('j',this)">Journey Mgmt</button>
+    <button class="pill" id="okr-g" onclick="toggleOkr('g',this)">Growth</button>
+    <div class="sep"></div>
+    <div class="ctrl-label">Discipline</div>
+    <div class="disc-filter">
+      <button class="disc-pill disc-pill-all active" id="disc-all" onclick="setDisc('all',this)">All</button>
+      <button class="disc-pill disc-pill-ux" id="disc-ux" onclick="setDisc('ux',this)">UX Design</button>
+      <button class="disc-pill disc-pill-uxr" id="disc-uxr" onclick="setDisc('uxr',this)">UX Research</button>
+      <button class="disc-pill disc-pill-sd" id="disc-sd" onclick="setDisc('sd',this)">Service Design</button>
+    </div>
+    <div class="sep"></div>
+    <label class="ai-ctx-toggle" title="Toggle AI context layer — v7">
+      <input type="checkbox" id="ai-ctx-toggle-chk" onchange="toggleAICtx(this.checked)">
+      <span class="ai-ctx-toggle-track"><span class="ai-ctx-toggle-thumb"></span></span>
+      <span class="ai-ctx-toggle-label">AI Context Layer</span>
+    </label>
+  </div>
+</header>
+
+
+
+<div class="scroll-wrap">
+  <div class="track-scroll" id="track-scroll">
+    <div style="width:max-content;min-width:100%;padding-bottom:2px;display:flex;align-items:center">
+      <div class="jb-header" style="flex:1">
+        <div class="jb-label"><div class="jb-dot"></div>Journey Management Thread · AS-IS / TO-BE</div>
+      </div>
+    </div>
+    <div class="jb-row" id="jb-row"></div>
+    <div class="track" id="track"></div>
+    <div style="height:10px"></div>
+    <div class="ctx-selector">
+    <span class="ctx-label">Context</span>
+    <div class="ctx-track">
+      <button class="ctx-pill ctx-pill-new ctx-active" id="ctx-new" onclick="setTrack('new',this)">New product</button>
+      <button class="ctx-pill ctx-pill-cti" id="ctx-cti" onclick="setTrack('cti',this)">Continuous · Think It</button>
+      <button class="ctx-pill ctx-pill-cbi" id="ctx-cbi" onclick="setTrack('cbi',this)">Continuous · Build It</button>
+    </div>
+    <div style="margin-left:auto;font-size:12px;color:var(--txt3);font-family:'Volvo Novum',sans-serif;white-space:nowrap;font-style:italic">Non-linear — any diamond in any phase at different weights</div>
+  </div>
+  <div class="ai-ctx-header" style="display:none">
+      <div class="ai-ctx-dot"></div>
+      <div class="ai-ctx-label-text">AI context layer — context accumulates and flows forward across every phase</div>
+    </div>
+    <div class="ai-ctx-row" id="ai-ctx-row" style="display:none"></div>
+    <div class="ai-ctx-bar" id="ai-ctx-bar" style="display:none"></div>
+  </div>
+</div>
+
+<div class="drawer-backdrop" id="backdrop" onclick="closeDet()"></div>
+<div class="drawer" id="drawer">
+  <div class="dr-head">
+    <div class="dr-breadcrumb">
+      <button class="dr-back" id="dr-back" onclick="goBack()">← Back</button>
+      <div class="dr-crumb" id="dr-crumb"></div>
+      <div class="dr-nav-inline" id="dr-nav-inline" style="display:none;align-items:center;gap:6px;margin-left:auto">
+        <button class="dr-nav-btn" id="dr-prev" onclick="navItem(-1)">← Prev</button>
+        <div class="dr-nav-pos" id="dr-nav-pos" style="font-size:12.5px;color:var(--txt3);font-family:'Volvo Novum',sans-serif;white-space:nowrap"></div>
+        <button class="dr-nav-btn" id="dr-next" onclick="navItem(1)">Next →</button>
+      </div>
+    </div>
+    <div class="dr-head-main">
+      <div style="flex:1">
+        <div class="dr-badge" id="dr-badge"></div>
+        <div class="dr-name" id="dr-name"></div>
+        <div class="dr-sub-txt" id="dr-sub"></div>
+        <div class="dr-meta" id="dr-meta"></div>
+      </div>
+      <button class="dr-close" onclick="closeDet()">✕</button>
+    </div>
+  </div>
+
+  <div style="flex:1;position:relative;min-height:0;overflow:hidden">
+  <div class="dr-scroll" id="dr-scroll">
+    <!-- VIEW 1: Diamond overview -->
+    <div class="dr-view" id="view-diamond">
+      <div class="dr-overview-intro" id="dv-intro"></div>
+      <div class="dr-sp-track">
+        <div class="dr-sp-track-label">Sub-phases — click to drill in</div>
+        <div class="dr-sp-cards" id="dv-sp-cards"></div>
+      </div>
+      <div class="dr-tbu-section" id="dv-tbu">
+        <div class="dr-tbu-label">Typical weight in the product development process</div>
+        <div class="dr-tbu-row" id="dv-tbu-cards"></div>
+      </div>
+      <div class="dr-jm-overview" id="dv-jm">
+        <div class="dr-jm-title">Journey Management</div>
+        <div class="dr-jm-row">
+          <div>
+            <div class="dr-jm-lbl">Activity</div>
+            <div class="dr-jm-activity" id="dv-jm-act"></div>
+            <div class="dr-jm-lbl" style="margin-top:8px">Artifact out</div>
+            <div class="dr-jm-val" id="dv-jm-out"></div>
+          </div>
+        </div>
+      </div>
+      <div id="dv-ai-ctx" style="display:none;border-top:1px solid rgba(59,111,232,.15);padding:12px 16px;background:rgba(59,111,232,.04)">
+        <div class="dr-ai-title">AI context layer</div>
+        <div class="dr-ai-lbl">Deposits into context</div>
+        <div class="dr-ai-val" id="dv-ai-deposits"></div>
+        <div class="dr-ai-lbl">Draws from context</div>
+        <div class="dr-ai-val" id="dv-ai-draws"></div>
+        <div class="dr-ai-lbl">AI role in this phase</div>
+        <div class="dr-ai-role" id="dv-ai-role"></div>
+      </div>
+      <div id="dv-acts-section" style="display:block;border-top:1px solid rgba(0,0,0,.06);padding:14px 16px;background:var(--bg2)">
+        <div style="display:flex;gap:16px;align-items:flex-start">
+          <div style="flex:1;min-width:0">
+            <div style="font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-family:'Volvo Novum',sans-serif;color:var(--ai-t);margin-bottom:7px">Sample activities</div>
+            <div id="dv-activities"></div>
+          </div>
+          <div style="flex:1;min-width:0">
+            <div style="font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-family:'Volvo Novum',sans-serif;color:var(--p-int);margin-bottom:7px">Sample deliverables</div>
+            <div id="dv-deliverables" style="display:flex;flex-wrap:wrap;gap:5px"></div>
+          </div>
+        </div>
+        <div style="font-size:12.5px;color:var(--txt3);margin-top:9px;font-style:italic;line-height:1.5">Source: DxD Function Design Process · activities and deliverables are indicative, not exhaustive</div>
+      </div>
+      <div class="dr-methods-section" id="dv-methods-section">
+        <div class="dr-methods-title">Methods & toolbox · click to open resource</div>
+        <div class="dr-methods-grid" id="dv-methods-grid"></div>
+      </div>
+    </div>
+
+    <!-- VIEW 2: Sub-phase detail -->
+    <div class="dr-view" id="view-subphase">
+      <div class="dr-detail-cols">
+        <div class="dr-col ai-col">
+          <div class="dr-col-hd">AI-assisted tasks</div>
+          <div id="sp-ai-tasks"></div>
+          <div class="dr-sec-label">AI tools for this phase</div>
+          <div id="sp-tools"></div>
+        </div>
+        <div class="dr-col hu-col">
+          <div class="dr-col-hd">Human-led tasks</div>
+          <div id="sp-hu-tasks"></div>
+          <div class="dr-sec-label">Future-relevant skills</div>
+          <div class="dr-sk-grid" id="sp-skills"></div>
+          <div class="dr-volvo-hd">Volvo Group context</div>
+          <div id="sp-volvo"></div>
+        </div>
+      </div>
+      <div class="dr-detail-jm" id="sp-jm">
+        <div class="dr-jm-title">Journey Management</div>
+        <div class="dr-jm-row">
+          <div>
+            <div class="dr-jm-lbl">Activity</div>
+            <div class="dr-jm-activity" id="sp-jm-act"></div>
+            <div class="dr-jm-lbl" style="margin-top:8px">Artifact in</div>
+            <div class="dr-jm-val" id="sp-jm-in"></div>
+            <div class="dr-jm-lbl" style="margin-top:8px">Artifact out</div>
+            <div class="dr-jm-val" style="color:#177844;font-size:14px" id="sp-jm-out"></div>
+          </div>
+          <div>
+            
+            <div class="dr-jm-lbl" style="margin-top:12px">Think It / Build It / Use It / RecycleIT</div>
+            <div id="sp-tbu-mini" style="display:flex;flex-direction:column;gap:3px;margin-top:4px"></div>
+          </div>
+          <div id="sp-track-ctx" style="margin-top:2px"></div>
+        </div>
+      </div>
+      </div>
+
+      <div id="sp-ai-ctx" style="display:none;border-top:1px solid rgba(59,111,232,.15);padding:12px 16px;background:rgba(59,111,232,.04)">
+        <div class="dr-ai-title">AI context layer</div>
+        <div class="dr-ai-lbl">Deposits into context</div>
+        <div class="dr-ai-val" id="sp-ai-deposits"></div>
+        <div class="dr-ai-lbl">Draws from context</div>
+        <div class="dr-ai-val" id="sp-ai-draws"></div>
+        <div class="dr-ai-lbl">AI role in this phase</div>
+        <div class="dr-ai-role" id="sp-ai-role"></div>
+        <div class="dr-ai-lbl">Context schema</div>
+        <div class="dr-ai-schema" id="sp-ai-schema"></div>
+      </div>
+      <div class="dr-rec-tools" id="sp-rec-tools">
+        <div class="dr-rec-title">Recommended tools to consider</div>
+        <div class="dr-rec-note">Not in current toolchain — investment case for AI readiness</div>
+        <div id="sp-rec-list"></div>
+      </div>
+      <div id="sp-principles-section" style="display:block;border-top:1px solid rgba(0,0,0,.06);padding:12px 16px;background:var(--bg2)">
+        <div style="font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-family:'Volvo Novum',sans-serif;color:var(--txt3);margin-bottom:8px">Design principles active in this phase</div>
+        <div id="sp-principles-tags" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px"></div>
+        <div id="sp-principle-desc" style="font-size:13px;color:var(--txt3);line-height:1.55;font-style:italic"></div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<div class="leg-strip">
+  <div class="leg-item"><div class="jb-dot"></div><div class="leg-lbl">Journey thread</div></div>
+  <div class="sep"></div>
+  <div class="leg-item"><div class="leg-bar" style="background:var(--ai-t);opacity:.7"></div><div class="leg-lbl">AI lean</div></div>
+  <div class="leg-item"><div class="leg-bar" style="background:var(--hu-t);opacity:.7"></div><div class="leg-lbl">Human lean</div></div>
+  <div class="sep"></div>
+  <div class="leg-item"><div class="leg-sq" style="background:var(--di-us)"></div><div class="leg-lbl">Understand</div></div>
+  <div class="leg-item"><div class="leg-sq" style="background:var(--di-cs)"></div><div class="leg-lbl">Concept</div></div>
+  <div class="leg-item"><div class="leg-sq" style="background:var(--di-dfs)"></div><div class="leg-lbl">Define</div></div>
+  <div class="leg-item"><div class="leg-sq" style="background:var(--di-dvs)"></div><div class="leg-lbl">Develop</div></div>
+  <div class="leg-item"><div class="leg-sq" style="background:var(--di-gs)"></div><div class="leg-lbl">Grow</div></div>
+  <div class="sep"></div>
+  <div class="leg-item"><div class="leg-sq" style="background:rgba(100,100,120,.3);border:1px solid rgba(100,100,120,.4)"></div><div class="leg-lbl">RecycleIT phase</div></div>
+</div>
+
+<script>
+const DI={
+  u:{col:'var(--di-u)',bg:'var(--di-us)',brd:'var(--di-ub)'},
+  c:{col:'var(--di-c)',bg:'var(--di-cs)',brd:'var(--di-cb)'},
+  df:{col:'var(--di-df)',bg:'var(--di-dfs)',brd:'var(--di-dfb)'},
+  dv:{col:'var(--di-dv)',bg:'var(--di-dvs)',brd:'var(--di-dvb)'},
+  g:{col:'var(--di-g)',bg:'var(--di-gs)',brd:'var(--di-gb)'}
+};
+const TC={llm:'tc-llm',res:'tc-res',des:'tc-des',dev:'tc-dev',ana:'tc-ana',col:'tc-col'};
+const FOR_LABELS={or:'One Rhythm',arch:'Architecture'};
+
+// Principle definitions
+const PRINCIPLES={
+  lc:{label:'Life-centred',     color:'#177844',bg:'rgba(42,171,148,.12)',brd:'rgba(42,171,148,.2)',  desc:'Understand human behaviours in a future context.'},
+  ec:{label:'Expanded context', color:'#2563eb',bg:'rgba(59,111,232,.12)', brd:'rgba(59,111,232,.2)', desc:'Solve the right problem — take a holistic view.'},
+  rc:{label:'Radical collaboration',color:'#9a6400',bg:'rgba(240,168,74,.12)',brd:'rgba(240,168,74,.2)', desc:'Break down silos and value diverse perspectives.'},
+  eb:{label:'Evidence-based',   color:'#6b3fa0',bg:'rgba(176,122,255,.12)',brd:'rgba(176,122,255,.2)',desc:'Reduce risk — qualitative insights supported by quant data.'},
+  ic:{label:'Infused creativity',color:'#b91c4a',bg:'rgba(232,74,111,.12)',brd:'rgba(232,74,111,.2)', desc:'Generate and visualise diverse, distinct, differentiated outcomes.'},
+  ie:{label:'Iterative explorations',color:'#3d7a1c',bg:'rgba(74,144,32,.12)',brd:'rgba(74,144,32,.2)',desc:"Solve the problem right — prototype, test and iterate."},
+};
+
+// Principle tags per sub-phase
+const SP_PRINCIPLES={
+  sp01:['lc','ec','rc'],sp02:['lc','eb','rc'],sp03:['ec','eb','lc'],
+  sp04:['ic','rc','ie'],sp05:['ic','ie','eb'],sp06:['eb','ie','lc'],
+  sp07:['rc','eb','ie'],sp08:['rc','ie','eb'],sp09:['eb','lc','ie'],
+  sp10:['eb','ec','lc'],
+};
+
+// Activities and deliverables per diamond
+const DIAMOND_CONTENT={
+  u:{
+    activities:[
+      {t:'Generative research — understand the problem space in new ways',disc:'uxr'},
+      {t:'Qualitative research — interviews, contextual inquiry, end-user shadowing',disc:'uxr'},
+      {t:'Secondary research — review historical feedback, past UX audits',disc:'uxr'},
+      {t:'Stakeholder collaboration — align on expected outcomes and success metrics',disc:'all'},
+      {t:'Problem framing — define the right problem before exploring solutions',disc:'all'},
+      {t:'Explore the opportunity space — identify where to focus',disc:'all'},
+      {t:'UX metrics definition — establish what success looks like',disc:'ux'},
+      {t:'Workflow and process mapping — AS-IS journey documentation',disc:'sd'},
+      {t:'Ecosystem and actor mapping — all people, organisations and systems involved in the service',disc:'sd'},
+      {t:'Stakeholder and staff interviews — understand those who deliver the service, not just those who use it',disc:'sd'},
+      {t:'Front-of-stage / back-of-stage observation — what users experience vs. what staff and systems do',disc:'sd'},
+      {t:'Service safari — experience the service as a user to surface unspoken pain points',disc:'sd'}
+    ],
+    deliverables:[
+      {t:'Problem Statement',disc:'all'},
+      {t:'Key Insights report',disc:'uxr'},
+      {t:'Personas / Archetypes',disc:'ux'},
+      {t:'Customer Journey Map (AS-IS)',disc:'ux'},
+      {t:'Opportunity Map',disc:'all'},
+      {t:'UX KPIs / HEART Framework',disc:'ux'},
+      {t:'Jobs-to-be-done',disc:'all'},
+      {t:'Stakeholder / Actor Map',disc:'sd'},
+      {t:'Ecosystem Map — full system of people, organisations, and touchpoints',disc:'sd'},
+      {t:'Service Blueprint (AS-IS) — front stage, back stage, support processes, and systems',disc:'sd'},
+      {t:'Research synthesis matrix',disc:'uxr'}
+    ],
+    methods:[{n:'Standardised briefing doc',url:'#'},{n:'Vision Mapping',url:'#'},{n:'Problem Statement template',url:'#'},{n:'Persona template',url:'#'},{n:'Customer Journey Map (AS-IS)',url:'#'},{n:'Opportunity Map',url:'#'},{n:'Business Model Canvas',url:'#'},{n:'Value-based Roadmap',url:'#'},{n:'UX KPIs / HEART Framework',url:'#'},{n:'HMW / 4W / SWOT templates',url:'#'},{n:'Stakeholder Map template',url:'#'},{n:'Ecosystem Map template',url:'#'},{n:'Service Blueprint (AS-IS)',url:'#'},{n:'Service Safari observation guide',url:'#'},{n:'Research synthesis / affinity mapping',url:'#'},
+{n:'TheyDo — Journey management · map, mine and manage AS-IS customer journeys and capture insights',url:'https://www.theydo.com'}
+,
+{n:'TheyDo — Journey management · design and validate TO-BE journeys, connect concepts to customer outcomes',url:'https://www.theydo.com'}
+,
+{n:'TheyDo — Journey management · link solutions and priorities to journey framework, connect to OKRs',url:'https://www.theydo.com'}
+,
+{n:'TheyDo — Journey management · continuous journey monitoring, live insight tracking, opportunity prioritisation',url:'https://www.theydo.com'}
+]
+  },
+  c:{
+    activities:[
+      {t:'Ideation sessions — divergent thinking, wide range of possibilities',disc:'all'},
+      {t:'Co-creation with stakeholders and service staff — align and cross-pollinate expertise',disc:'all'},
+      {t:'Sketching — early rough concepts and idea exploration',disc:'ux'},
+      {t:'Rapid prototyping — from paper to low-fidelity digital',disc:'ux'},
+      {t:'Evaluative research — test concepts with users early',disc:'uxr'},
+      {t:'Concept synthesis and convergence — refine and select strongest directions',disc:'all'},
+      {t:'Feasibility checks — technology, business, and user viability',disc:'all'},
+      {t:'Future-state journey mapping — designing the TO-BE experience',disc:'all'},
+      {t:'Service concept development — design the end-to-end service across all touchpoints, not just the digital interface',disc:'sd'},
+      {t:'Service storyboarding — narrative walkthrough across all touchpoints and actors',disc:'sd'},
+      {t:'Experience prototyping — simulate service moments including non-digital touchpoints',disc:'sd'},
+      {t:'Value proposition design — articulate the value for each actor in the service ecosystem',disc:'sd'}
+    ],
+    deliverables:[
+      {t:'Idea boards and concept sketches',disc:'ux'},
+      {t:'Concept visualisations',disc:'ux'},
+      {t:'Low-fidelity prototypes (paper, whiteboard)',disc:'ux'},
+      {t:'Medium / High-fidelity prototypes',disc:'ux'},
+      {t:'Customer Journey Map (TO-BE)',disc:'all'},
+      {t:'Validated concept with user evidence',disc:'all'},
+      {t:'Service Concept — proposed service across all touchpoints and actors',disc:'sd'},
+      {t:'Service Blueprint (TO-BE) — future state with front stage, back stage, and enabling systems',disc:'sd'},
+      {t:'Service storyboard — visual narrative of the service experience end to end',disc:'sd'},
+      {t:'Value Proposition Canvas — per actor or user segment',disc:'sd'},
+      {t:'Experience Principles — design principles specific to this service',disc:'sd'}
+    ],
+    methods:[{n:'Sketching & storyboard templates',url:'#'},{n:'Wireframe kit',url:'#'},{n:'Prototype samples',url:'#'},{n:'User Evaluation Report template',url:'#'},{n:'Kano Model',url:'#'},{n:'Validated Concept Prototype',url:'#'},{n:'Service Blueprint (TO-BE)',url:'#'},{n:'Value Proposition Canvas',url:'#'},{n:'Service storyboard template',url:'#'},{n:'Co-design workshop facilitation guide',url:'#'},{n:'Experience prototyping kit',url:'#'}]
+  },
+  df:{
+    activities:[
+      {t:'User story mapping — translate validated concepts into product requirements',disc:'ux'},
+      {t:'Roadmap creation — value-based sequencing of delivery',disc:'all'},
+      {t:'Feasibility assessment — what can be built, in what order',disc:'all'},
+      {t:'Prioritisation — balance user, business, and technical perspectives',disc:'all'},
+      {t:'Impact mapping — connect features to measurable outcomes',disc:'all'},
+      {t:'Success criteria setting — define metrics for the build phase',disc:'all'},
+      {t:'Service specification — define how the service works across all channels and touchpoints',disc:'sd'},
+      {t:'Front / back of stage design — specify what users experience, what staff do, and what systems enable it',disc:'sd'},
+      {t:'Organisational and process design — identify what changes in operations, roles, or processes to deliver the service',disc:'sd'},
+      {t:'Channel strategy — how the service works across digital, physical, and human touchpoints',disc:'sd'},
+      {t:'Pilot planning — design a testable version of the service before full build',disc:'sd'}
+    ],
+    deliverables:[
+      {t:'Value-based roadmap',disc:'all'},
+      {t:'User Stories',disc:'ux'},
+      {t:'Prioritised Backlog',disc:'all'},
+      {t:'Success criteria and UX metrics',disc:'all'},
+      {t:'Go / No-go recommendation',disc:'all'},
+      {t:'Service Blueprint (detailed / build-ready) — operational spec connecting front stage to back stage',disc:'sd'},
+      {t:'Channel strategy — how the service is delivered across touchpoints',disc:'sd'},
+      {t:'Organisational impact map — what changes in roles, processes, or systems',disc:'sd'},
+      {t:'Pilot plan — how to test the service before full rollout',disc:'sd'}
+    ],
+    methods:[{n:'User Story template',url:'#'},{n:'Roadmap template',url:'#'},{n:'Backlog example',url:'#'},{n:'UX KPIs / HEART Framework',url:'#'},{n:'Technical Feasibility Report',url:'#'},{n:'Impact Mapping',url:'#'},{n:'Service Blueprint (detailed)',url:'#'},{n:'Channel strategy template',url:'#'},{n:'Pilot design canvas',url:'#'},{n:'Organisational impact mapping',url:'#'}]
+  },
+  dv:{
+    activities:[
+      {t:'High-fidelity design — detailed UI, interaction patterns, design system application',disc:'ux'},
+      {t:'Development support — design QA, spec reviews, in-sprint collaboration',disc:'ux'},
+      {t:'User research — evaluative studies during build to catch problems early',disc:'uxr'},
+      {t:'User testing — validate that the solution performs as intended',disc:'uxr'},
+      {t:'Iteration on design and prioritisation — continuous refinement based on evidence',disc:'all'},
+      {t:'Design system contributions — maintaining shared patterns and components',disc:'ux'},
+      {t:'Service pilot / live test — run the service with real users and staff before full rollout',disc:'sd'},
+      {t:'Staff and process enablement — ensure the people delivering the service are ready',disc:'sd'},
+      {t:'Front / back of stage coordination — align digital build with operational and process changes',disc:'sd'},
+      {t:'Service performance baseline — establish how to measure service quality beyond the UI',disc:'sd'}
+    ],
+    deliverables:[
+      {t:'Wireframes and user flows',disc:'ux'},
+      {t:'High-fidelity designs',disc:'ux'},
+      {t:'Information Architecture',disc:'ux'},
+      {t:'Design assets (handoff-ready)',disc:'ux'},
+      {t:'Flow charts',disc:'ux'},
+      {t:'Key insights from in-sprint research',disc:'uxr'},
+      {t:'Service pilot findings — what worked and what needs adjustment before rollout',disc:'sd'},
+      {t:'Staff / process enablement materials — training, process guides, operational specs',disc:'sd'},
+      {t:'Service performance baseline — agreed metrics covering the full service',disc:'sd'},
+      {t:'Updated Service Blueprint — reflecting what was built vs. what was specified',disc:'sd'}
+    ],
+    methods:[{n:'Information Architecture template',url:'#'},{n:'Mock-up & prototype kit',url:'#'},{n:'Interactive Prototype samples',url:'#'},{n:'User Evaluation / Usability Testing Report',url:'#'},{n:'UX KPIs / HEART Framework',url:'#'},{n:'Technical Feasibility Report',url:'#'},{n:'Service pilot template',url:'#'},{n:'Staff enablement / process design guide',url:'#'},{n:'Service performance scorecard',url:'#'}]
+  },
+  g:{
+    activities:[
+      {t:'Continuous iterations — improve the live product based on real data',disc:'ux'},
+      {t:'Interviews and observation — qualitative understanding of live-product behaviour',disc:'uxr'},
+      {t:'Summative research — assess overall performance against defined metrics',disc:'uxr'},
+      {t:'User evaluations and usability testing — ongoing quality assurance',disc:'uxr'},
+      {t:'Continuous prioritisation — feed findings back into the backlog',disc:'all'},
+      {t:'Analytics review — quantitative signals from live usage',disc:'all'},
+      {t:'Service health review — assess the full service, not just the digital product',disc:'sd'},
+      {t:'Ecosystem monitoring — track how the broader system of actors and channels is performing',disc:'sd'},
+      {t:'Service evolution planning — identify how the service needs to change as context shifts',disc:'sd'}
+    ],
+    deliverables:[
+      {t:'User Evaluation Report',disc:'uxr'},
+      {t:'Usability Testing Report',disc:'uxr'},
+      {t:'Key Insights (live product)',disc:'all'},
+      {t:'Updated Opportunity Map',disc:'all'},
+      {t:'Updated Prioritised Backlog',disc:'all'},
+      {t:'Roadmap updates',disc:'all'},
+      {t:'Service health scorecard — metrics covering the full service including back-of-stage',disc:'sd'},
+      {t:'Updated Service Blueprint — live state reflecting actual service delivery',disc:'sd'},
+      {t:'Ecosystem / stakeholder feedback summary — input from staff, partners, and operational teams',disc:'sd'}
+    ],
+    methods:[{n:'User Evaluation / Usability Testing Report',url:'#'},{n:'Key Insight format',url:'#'},{n:'Opportunity Map',url:'#'},{n:'Prioritised Backlog template',url:'#'},{n:'Roadmap template',url:'#'},{n:'UX KPIs / HEART Framework',url:'#'},{n:'Technical Feasibility Report',url:'#'},{n:'Service health scorecard template',url:'#'},{n:'Service Blueprint (live / maintained)',url:'#'},{n:'Ecosystem feedback loop template',url:'#'}]
+  },
+};
+const TBU_LABELS={think:'Think It',build:'Build It',use:'Use It'};
+
+const SUB_PHASES=[
+{id:'sp01',diamond:'u',num:'01',name:'Discovery & Strategic Alignment',sub:'Identifying the right problem space',ai:20,stakeholder:5,okrs:['p','j','g'],
+journey:{activity:'Identify journeys in scope',artifactIn:'Business strategy · Brand mandates · Stakeholder inputs',artifactOut:'Journey brief · Journey owner assignment · Scope · Dependency map',forums:[],forumDetails:[],tool:'TheyDo'},
+aiCtx:{deposits:'Stakeholder inputs · Strategic constraints · Journey scope definition',drawsFrom:'None — context layer initialised here',aiRole:'Synthesises stakeholder inputs into a structured scope brief. Surfaces conflicting strategic priorities for human resolution. Initialises the context object.',schema:['journey_scope','stakeholder_priorities','strategic_constraints','success_definition']},
+trackContext:{new:`Starting from scratch — broad stakeholder alignment on a new product or programme. Scope is open, assumptions are untested, strategic framing is the primary output.`,cti:`Re-aligning on the next significant investment cycle. You have existing context — the work here is to agree what the next problem worth solving is, based on what you already know.`,cbi:`Mid-delivery alignment — confirming scope and priorities for the current build cycle. Fast, focused, based on existing evidence rather than fresh exploration.`},
+tbu:[{id:'think',label:'Think It',active:true,desc:'Primary home — generating the strategic evidence that makes Think It decisions credible.'},{id:'build',label:'Build It',secondary:true,desc:'Revisited when requirements shift or problem space needs reframing mid-build.'},{id:'use',label:'Use It',secondary:true,desc:'Can occur here to augment understanding of a live product before the next improvement cycle.'},{id:'recycle',label:'RecycleIT',active:false,secondary:false,desc:''}],
+aiTasks:[{t:'Market & competitor landscape synthesis',d:'Copilot aggregates public reports, analyst data, competitor benchmarks across documents'},{t:'Regulatory & standards scan',d:'EU accessibility law, truck safety regs, emissions, CE marking — Copilot processes across sources'},{t:'Internal data aggregation',d:'NPS, support tickets, sales funnel data across brands — synthesised by Copilot'},{t:'Stakeholder interview guide generation',d:'Copilot drafts question sets for C-suite, product owners, fleet managers'},{t:'Opportunity sizing models',d:'First-pass effort/impact matrices from raw opportunity data'},
+{t:'TheyDo Journey AI — Journey structure synthesis',d:'Converts stakeholder inputs into a journey hierarchy — maps scope, ownership, and dependencies across the journey framework'}
+],
+tools:[{n:'Copilot',cls:'llm',d:'Brief synthesis, interview guides, competitive analysis summaries'},{n:'FigJam',cls:'col',d:'Async stakeholder input collection and opportunity clustering'},{n:'Mural',cls:'col',d:'Cross-brand alignment sessions and opportunity landscape mapping'},{n:'Microsoft 365',cls:'col',d:'Stakeholder briefing documents, opportunity registers, alignment decks'},
+{n:'TheyDo',cls:'jm',d:'Journey management — establish journey hierarchy, frame scope, connect to business goals and OKRs',url:'https://www.theydo.com'}
+],
+huTasks:[{t:'Defining the vision & why now',d:'Strategic framing only leadership and design directors can own'},{t:'Brand & business alignment',d:'Ensuring VCE, VT, Renault, Mack, Buses have coherent but differentiated strategy'},{t:'Journey owner assignment',d:'Designating the human accountable for the end-to-end journey — the most important governance act'},{t:'Political navigation & sponsor alignment',d:'Identifying executive champions per division, managing competing priorities'},{t:'Go / no-go on problem space',d:'Senior judgment on whether the opportunity is worth pursuing at all'}],
+skills:['Strategic thinking','Organisational navigation','Executive communication','Brand stewardship','Ethical judgment','Journey ownership'],
+volvo:[{badge:'Scale',bc:'var(--mat1)',bt:'var(--mat1t)',t:'Operating across Volvo Group\ multiple brands, 190 countries. Discovery must account for radically different constraints — a VCE excavator operator interface cannot share UX assumptions with a Volvo Buses ticketing portal.'},{badge:'Lead stretch',bc:'var(--mat3)',bt:'var(--mat3t)',t:'Leads are often doing this phase alone because local product teams don\ understand what UX discovery is for, and because the DxD Function/domain matrix means delivery accountability can pull leads away from upstream strategic work. Journey ownership combined with One Rhythm presence is the structural fix — it gives leads a governance reason to be at the table before decisions are made.'},{badge:'Maturity signal',bc:'var(--mat2)',bt:'var(--mat2t)',t:'At maturity 3, discovery is connected to journey evidence. At maturity 4, discovery is continuous — journey signals are monitored in real time rather than triggered by a new project brief.'}],recTools:[{n:`Claude / Gemini`,why:`Conversational AI for deep stakeholder interview synthesis, opportunity framing, and strategic brief writing. The single highest-leverage missing tool for discovery work.`},{n:`Perplexity Pro`,why:`Real-time market intelligence, regulatory scanning, and competitor research — faster and more current than Copilot for external research.`}]},
+
+{id:'sp02',diamond:'u',num:'02',name:'Research & User Empathy',sub:'Understanding real people in their real context',ai:35,stakeholder:4,okrs:['p','j'],
+journey:{activity:'Capture AS-IS evidence',artifactIn:'Journey brief · Scope · Journey owner from Discovery',artifactOut:'Evidence repository · Observed AS-IS pain points · Behavioural data · Quoted user moments',forums:[],forumDetails:[],tool:'TheyDo'},
+aiCtx:{deposits:'Pain points tagged by severity + frequency · Behavioural patterns · Evidence links',drawsFrom:'Journey scope from Discovery & Strategic Alignment',aiRole:'Structures research data into a tagged evidence pack. Groups pain points by journey step and severity. Surfaces patterns across large data sets the human may not have noticed.',schema:['pain_points[]','user_needs[]','behavioural_patterns[]','evidence_links[]']},
+trackContext:{new:`Generative research from a blank slate — interviews, contextual inquiry, broad landscape review. High uncertainty, wide scope. The goal is to build an evidence base that doesn't yet exist.`,cti:`Research to inform the next problem framing. You have a live product and user data — supplement with targeted qualitative work to understand emerging needs and shifts in behaviour.`,cbi:`Evaluative research running in parallel with delivery. Targeted studies on specific in-flight decisions. Faster cycles, constrained scope, directly feeding backlog and sprint decisions.`},
+tbu:[{id:'think',label:'Think It',active:true,desc:'Core of Think It — generating the user evidence that makes strategy decisions credible and journey maps meaningful.'},{id:'build',label:'Build It',secondary:true,desc:'Frequently revisited mid-build to answer questions that weren\ asked earlier or that new complexity has surfaced.'},{id:'use',label:'Use It',secondary:true,desc:'Generative research on live products to deepen understanding before the next improvement cycle begins.'},{id:'recycle',label:'RecycleIT',active:false,secondary:true,desc:'Research from Understand can feed a User Sunset Strategy — understanding behaviour and loyalty drivers that inform what to retain at end-of-lifecycle.'}],
+aiTasks:[{t:'Interview transcription & auto-tagging',d:'Copilot / Otter.ai processes sessions — auto-tags themes, generates highlight reels at scale'},{t:'Survey response coding',d:'Quantitative and open-text analysis across dealer, operator, and internal populations'},{t:'Cross-brand pattern recognition',d:'Dovetail clusters themes across studies — surfaces patterns common to VT dealers, VCE operators, Mack fleet managers'},{t:'Literature & prior research synthesis',d:'Copilot pulls relevant past studies from internal repositories and prior Dovetail projects'},{t:'Persona draft generation',d:'First-pass persona documents from research data for human refinement'},
+{t:'TheyDo Journey AI — Research mining → journey insights',d:'Mines qualitative research data — interviews, surveys, feedback — into tagged insights mapped automatically to journey touchpoints'}
+],
+tools:[{n:'Dovetail',cls:'res',d:'Research repository — tagging, theme clustering, evidence linking to journey steps across all studies'},{n:'Maze',cls:'res',d:'Unmoderated usability studies at scale — useful for dealer and operator panels'},{n:'Mural',cls:'col',d:'Collaborative affinity mapping and synthesis workshops — especially useful distributed across Sweden, Poland, France, US'},{n:'FigJam',cls:'col',d:'Live research readout sessions, async synthesis with stakeholders'},{n:'Copilot',cls:'llm',d:'Interview guide drafts, transcript synthesis, affinity mapping from notes'},
+{n:'TheyDo',cls:'jm',d:'Journey management — map and mine journeys, capture and tag insights, prioritise opportunities, connect to OKRs',url:'https://www.theydo.com'}],
+huTasks:[{t:'Conducting empathy interviews',d:'Building the trust needed to get real answers from drivers, mechanics, and site operators — irreducibly human'},{t:'Field & contextual observation',d:'Riding in cabs, visiting depots, walking factory floors — physical context AI cannot access'},{t:'Linking observations to journey map',d:'Tagging every finding to a specific AS-IS step — this is what makes the journey artifact evidence-linked'},{t:'Cultural & regional adaptation',d:'Research in Brazil, Germany, India, and Sweden requires humans who understand local norms and protocols'},{t:'Research ethics & consent',d:'GDPR, operator dignity, internal confidentiality — human judgment essential throughout'}],
+skills:['Empathy & active listening','Ethnographic research','Cultural intelligence','Qualitative synthesis','Research ethics','Journey evidence linking'],
+volvo:[{badge:'Context',bc:'var(--mat1)',bt:'var(--mat1t)',t:'Volvo Group users span SAP configurator users to excavator operators in -20°C to fleet managers juggling 300 trucks. Research methods must adapt radically per audience — the same approach will not work across all Volvo Group\ multiple brands.'},{badge:'Evidence linking',bc:'var(--mat3)',bt:'var(--mat3t)',t:'Every finding should be tagged to a specific step in the AS-IS journey in Dovetail. This is what makes the journey artifact evidence-linked — a requirement for it to carry weight in One Rhythm and Architecture forums.'},{badge:'Maturity signal',bc:'var(--mat4)',bt:'var(--mat4t)',t:'At maturity 4, you maintain a standing participant panel across brands and regions. Journey evidence is continuously updated — not a one-off data dump per project.'}],recTools:[{n:`Claude`,why:`Synthesis of large qualitative datasets — interview transcripts, field notes, and affinity clusters — with a level of nuance that current Copilot cannot match for research contexts.`},{n:`UserTesting`,why:`Remote moderated session platform for reaching real operators, dealers, and fleet managers who can't come to a lab. Integrates with Dovetail.`}]},
+
+{id:'sp03',diamond:'u',num:'03',name:'Problem Framing & Definition',sub:'Articulating the right challenge with precision',ai:30,stakeholder:5,okrs:['p','j'],
+journey:{activity:'Map AS-IS · Define TO-BE vision',artifactIn:'Evidence repository · AS-IS observations from Research',artifactOut:'AS-IS journey map · TO-BE journey vision · Linked evidence · Defined success metrics',forums:[{type:'or',text:'TO-BE journey vision enters One Rhythm (Volvo Group\ 10-week planning cadence) to sequence delivery, surface cross-domain dependencies, and connect journey progress to sprint planning across teams and brands.'}],forumDetails:[{type:'or',text:'TO-BE journey vision enters One Rhythm (Volvo Group\ 10-week planning cadence) to sequence delivery, surface cross-domain dependencies, and connect journey progress to sprint planning across teams and brands.'}],tool:'TheyDo'},
+aiCtx:{deposits:'Validated problem statement · AS-IS journey map · TO-BE vision seeds',drawsFrom:'Evidence pack from Research & Synthesis · Scope from sp01',aiRole:'Proposes problem framings grounded in evidence. Generates AS-IS map structure from research data. Flags gaps in evidence coverage. Seeds the TO-BE vision the designer then directs.',schema:['problem_statement','as_is_map','evidence_gaps[]','to_be_seeds[]']},
+trackContext:{new:`Define the problem from first principles. No existing solution to anchor on — the framing is exploratory and may take several iterations before the right problem is clearly defined.`,cti:`Reframe the problem based on what live data and ongoing research is telling you. The question is: what is the most valuable problem to solve next, given what we already know?`,cbi:`Targeted problem framing for a specific delivery challenge. Rapid, evidence-based, directly connected to what is being built. Less about broad discovery, more about resolving a specific uncertainty.`},
+tbu:[{id:'think',label:'Think It',active:true,desc:'The natural output of Think It — the AS-IS/TO-BE pair and scope definition is what Think It produces as its deliverable to the organisation.'},{id:'build',label:'Build It',secondary:true,desc:'Problem framing can recur at the start of a significant new build phase — especially when the original framing was narrow or conditions have changed.'},{id:'use',label:'Use It',active:false,desc:''},{id:'recycle',label:'RecycleIT',active:false,secondary:true,desc:'Problem framing applies in RecycleIT when scoping a sunset — defining the offboarding experience and what success looks like at end-of-service.'}],
+aiTasks:[{t:'POV & HMW statement generation',d:'Copilot drafts Point-of-View statements and How-Might-We prompts from research synthesis'},{t:'AS-IS journey map scaffolding',d:'FigJam AI and Figma populate journey map structures from interview data and session recordings'},{t:'Opportunity landscape mapping',d:'Copilot plots problem areas on effort/impact matrices from research themes'},{t:'Success metric suggestions',d:'Propose KPIs and OKR language aligned to business goals per brand for human refinement'},{t:'User story drafting',d:'Initial user story sets generated by Copilot for refinement by product and UX teams'},
+{t:'TheyDo Journey AI — AS-IS journey generation',d:'Generates AS-IS journey structure from evidence repository; clusters pain points by touchpoint, severity, and frequency'}
+],
+tools:[{n:'Figma',cls:'des',d:'AS-IS/TO-BE journey map visualisation and service blueprint creation'},{n:'FigJam',cls:'col',d:'Live problem framing sessions — journey mapping workshops with cross-brand stakeholders'},{n:'Mural',cls:'col',d:'Collaborative AS-IS/TO-BE workshops, stakeholder alignment sessions'},{n:'Copilot',cls:'llm',d:'Problem statement drafts, journey map narratives, HMW expansion, opportunity framing'},{n:'Dovetail',cls:'res',d:'Connecting research themes to defined problem statements — maintaining evidence traceability'},
+{n:'TheyDo',cls:'jm',d:'Journey management — map and mine journeys, capture and tag insights, prioritise opportunities, connect to OKRs',url:'https://www.theydo.com'}
+],
+huTasks:[{t:'Creating and owning the AS-IS/TO-BE pair',d:'The journey owner assembles the map from evidence — this is the governance artefact carried forward into One Rhythm'},{t:'Defining the TO-BE vision',d:'Articulating what the experience should become — the strategic intent giving all subsequent work direction'},{t:'Stakeholder alignment workshops',d:'Getting product, engineering, brand, and commercial teams to agree on the defined problem across Volvo brands'},{t:'OKR & business outcome alignment',d:'Tying UX problems to business metrics that leadership will fund'},{t:'Ethical implications assessment',d:'Safety-critical systems (HMI, warning systems) need human ethical judgment at framing stage'}],
+skills:['Systems thinking','Problem reframing','Facilitation','Storytelling','OKR literacy','Journey ownership','Ethical reasoning'],
+volvo:[{badge:'Matrix moment',bc:'var(--mat2)',bt:'var(--mat2t)',t:'Define is where both dimensions of the DxD Function matrix must be present. Function leads bring competence standards — ensuring scope reflects what the team can sustainably deliver at quality. Domain heads bring delivery context — ensuring the roadmap is viable within product team constraints. When only one dimension is present at Define, quality or delivery suffers.'},{badge:'Journey governance',bc:'var(--mat3)',bt:'var(--mat3t)',t:'This is the sub-phase where journey management becomes a governance act. The AS-IS/TO-BE pair produced here becomes the source of truth for One Rhythm delivery sequencing. The journey owner must maintain it with minimal guardrails — current, evidence-linked, accessible.'},{badge:'Positioning gap',bc:'var(--mat1)',bt:'var(--mat1t)',t:'This is the sub-phase UX Design is most often excluded from. When teams skip from Think It to Build It without a proper problem framing moment, UX gets invited in late. Getting consistently into this phase is the single highest-leverage change for the team.'},{badge:'Maturity signal',bc:'var(--mat2)',bt:'var(--mat2t)',t:'At maturity 2, problem framing is skipped. At maturity 4, the AS-IS/TO-BE pair is a non-negotiable governance output — a real input to One Rhythm, not a document filed in Figma and forgotten.'}],recTools:[{n:`Claude`,why:`Problem statement generation, HMW expansion, and AS-IS/TO-BE journey narrative drafting with strategic depth beyond current Copilot capability.`},{n:`Notion AI`,why:`Structured knowledge management for journey artifacts — maintaining AS-IS/TO-BE pairs with version history and evidence links in a more accessible format than Figma for non-designers.`}]},
+
+{id:'sp04',diamond:'c',num:'04',name:'Ideation & Concept Design',sub:'Generating and selecting directions',ai:50,stakeholder:3,okrs:['p','g'],
+journey:{activity:'Define TO-BE concept scenarios',artifactIn:'TO-BE journey vision · Success metrics from Problem Framing',artifactOut:'Journey scenario concepts · Design hypotheses · Concept narrative per journey step',forums:[],forumDetails:[],tool:'TheyDo'},
+aiCtx:{deposits:'Concept directions · Divergent explorations · Evaluation rationale',drawsFrom:'Full evidence pack · Problem statement · AS-IS map from Understand',aiRole:'Generates concept variants already informed by pain points — no re-briefing needed. Flags directions that address vs ignore known pain points. Human directs and selects.',schema:['concept_directions[]','addressed_pain_points[]','open_pain_points[]','concept_rationale']},
+trackContext:{new:`Wide divergent ideation — the solution space is fully open. Explore broadly before converging. Quantity and range matter more than feasibility at this stage.`,cti:`Directed ideation informed by existing product knowledge. You know what has and hasn't worked — use that to generate more targeted concepts for the next cycle.`,cbi:`Constrained ideation within an active delivery context. Options are bounded by what can be built in the current cycle. Feasibility is an early filter, not a later one.`},
+tbu:[{id:'think',label:'Think It',active:true,desc:'Strong overlap — concepting and prototyping early ideas is how Think It produces something worth investing in.'},{id:'build',label:'Build It',secondary:true,desc:'Concept work often continues into Build It when requirements evolve and new solutions need exploring before sprints catch up.'},{id:'use',label:'Use It',active:false,desc:''},{id:'recycle',label:'RecycleIT',active:false,secondary:false,desc:''}],
+aiTasks:[{t:'Rapid concept variation generation',d:'Figma Make generates layout and UI concepts from briefs — 10–20 variants in minutes for evaluation'},{t:'Visual territory exploration',d:'Figma AI and FigJam AI generate mood boards, visual directions, tone-of-voice options'},{t:'"How might we" expansion',d:'Copilot multiplies ideation prompts from defined problem statements — useful for workshop preparation'},{t:'Low-fidelity prototype scaffolding',d:'Figma Make scaffolds wireframe flows from feature descriptions — accelerates concept testing setup'},{t:'Concept synthesis',d:'Copilot and Dovetail cluster and score concept variants from evaluative research sessions'}],
+tools:[{n:'Figma',cls:'des',d:'Primary design tool — concept sketches, low-fidelity flows, early prototype iterations'},{n:'Figma Make',cls:'des',d:'Generate UI concept variants from text briefs — dramatically accelerates divergence phase'},{n:'FigJam',cls:'col',d:'Ideation sessions, concept clustering, dot-voting with cross-brand stakeholders'},{n:'Mural',cls:'col',d:'Co-creation workshops with product and engineering — distributed ideation across our geographical presence'},
+{n:'TheyDo',cls:'jm',d:'Journey management — map and mine journeys, capture and tag insights, prioritise opportunities, connect to OKRs',url:'https://www.theydo.com'}
+],
+huTasks:[{t:'Creative direction & concept selection',d:'AI generates; humans decide — choosing which direction serves the TO-BE vision requires taste and judgment'},{t:'Brand coherence judgment',d:'VCE ≠ Volvo Buses in tone, visual weight, or interaction density — human art direction sets the bar'},{t:'TO-BE journey vision',d:'Defining what the experience should become — the strategic intent giving all subsequent work its direction'},{t:'Ethical design assessment',d:'Avoiding dark patterns, manipulative UI, accessibility-excluding concepts — especially for safety-critical HMI'},{t:'Concept storytelling to stakeholders',d:'Presenting concepts in a way that earns investment and alignment across brands'}],
+skills:['Creative direction','Design taste & judgment','Brand stewardship','Concept storytelling','Creative courage','Ethical design literacy'],
+volvo:[{badge:'Brand split',bc:'var(--mat1)',bt:'var(--mat1t)',t:'VCE (industrial, gloves-first, high-contrast) vs. Volvo Buses (passenger comfort) vs. dealer portals (conversion, trust signals). Figma Make outputs need brand-specific guardrails and human art direction per brand.'},{badge:'XR opportunity',bc:'var(--mat4)',bt:'var(--mat4t)',t:'Cab-as-interface, AR maintenance guides, VR training simulators — Volvo Group has significant XR opportunity. Concept work needs spatial and embodied concepts, not just screen-based ones.'},{badge:'Maturity signal',bc:'var(--mat3)',bt:'var(--mat3t)',t:'At maturity 4, concept backlogs are maintained between projects. When a new initiative starts in a known journey area, relevant concepts are already waiting — informed by prior research and TO-BE definitions.'}],recTools:[{n:`Midjourney`,why:`Visual territory exploration and mood board generation — especially valuable for consumer-facing and XR concept work.`},{n:`Adobe Firefly`,why:`Brand-safe generative imagery within the Adobe ecosystem — especially valuable for consumer-facing concept work.`},{n:`Claude`,why:`Concept narrative writing, feature description, UX brief expansion, and 'how might we' ideation at a depth and quality that significantly exceeds Copilot.`}]},
+
+{id:'sp05',diamond:'c',num:'05',name:'Design & Prototyping',sub:'Shaping the experience in detail',ai:55,stakeholder:3,okrs:['p','j'],
+journey:{activity:'Design to journey specification',artifactIn:'TO-BE vision · Concept scenarios from Ideation',artifactOut:'Journey-aligned design · Prototype mapped to journey states · Updated AS-IS annotations',forums:[],forumDetails:[],tool:'TheyDo'},
+aiCtx:{deposits:'Selected concept · TO-BE vision formalised · Design constraints',drawsFrom:'Concept directions + rationale from Ideation · Evidence pack from Understand',aiRole:'Evaluates concepts against the evidence pack. Surfaces alignment or misalignment with surfaced user needs. Generates prototype variants from VGDS against TO-BE direction.',schema:['selected_direction','to_be_vision','design_constraints[]','validation_findings[]']},
+trackContext:{new:`Low-fidelity first — paper, sketches, rough digital. The goal is to learn as fast as possible whether the concept direction is viable. Don't invest in fidelity before validating the concept.`,cti:`Medium to high fidelity aligned to an existing product. Prototypes build on the established design system. The bar for concept validation is higher because you have prior evidence to compare against.`,cbi:`High-fidelity design integrated with active delivery. Design QA and in-sprint collaboration are the dominant activities. Prototyping is for specific unresolved questions, not broad exploration.`},
+tbu:[{id:'think',label:'Think It',secondary:true,desc:'High-fidelity prototypes are sometimes needed to validate strategic direction before committing to build.'},{id:'build',label:'Build It',active:true,desc:'Primary home — detailed design and prototyping runs throughout Build It, feeding directly into development sprints.'},{id:'use',label:'Use It',secondary:true,desc:'Iteration on live products — designing improvements based on analytics and user feedback from the Grow phase.'},{id:'recycle',label:'RecycleIT',active:false,secondary:true,desc:'Design in RecycleIT focuses on offboarding journeys and transition experiences — creating an intentional end-state rather than functional termination.'}],
+aiTasks:[{t:'UI variant & layout generation',d:'Figma Make generates screen layouts from component libraries and text briefs'},{t:'Design token & component suggestions',d:'Figma AI surfaces relevant Volvo design system components for each screen context'},{t:'Accessibility annotation generation',d:'Figma AI auto-annotates ARIA roles, focus order, contrast ratios for dev handoff'},{t:'Copy & microcopy drafting',d:'Copilot drafts error messages, empty states, tooltips, onboarding text for human refinement'},{t:'Responsive & adaptive previews',d:'Figma generates breakpoints for mobile, tablet, dashboard, and XR viewports automatically'}],
+tools:[{n:'Figma',cls:'des',d:'Primary design and prototyping tool — Volvo design system lives here'},{n:'Figma Make',cls:'des',d:'Generate UI variants rapidly from component libraries and text briefs'},{n:'Figma AI',cls:'des',d:'Layout generation, component suggestions, auto-annotation for dev handoff'},{n:'Copilot',cls:'llm',d:'Microcopy, content design, interaction narrative, accessibility documentation'},{n:'Mural',cls:'col',d:'Design critique sessions and async stakeholder feedback across distributed team'}],
+huTasks:[{t:'Interaction design intent',d:'Defining how the product communicates — pacing, feedback, affordance, animation intent — AI cannot determine this'},{t:'Journey-step-to-screen mapping',d:'Ensuring every screen maps to a specific TO-BE journey step — keeping design journey-accountable'},{t:'Design system governance',d:'Deciding when to extend vs. respect existing patterns — requires system-level thinking and brand judgment'},{t:'Edge case & error state design',d:'The 20% of states defining 80% of trust — safety-critical for HMI, legally significant for dealer tools'},{t:'Accessibility design decisions',d:'Genuine inclusion for operators with gloves, noise, vibration, sun glare — beyond automated compliance'}],
+skills:['Interaction design','Information architecture','Design systems thinking','Content design','Accessibility design','Visual craft'],
+volvo:[{badge:'Design system',bc:'var(--mat2)',bt:'var(--mat2t)',t:'A mature Volvo Group design system is critical infrastructure for Figma Make to accelerate safely. Without it, AI generation just produces inconsistency faster. The system must encode brand + accessibility + component logic per brand.'},{badge:'HMI complexity',bc:'var(--mat1)',bt:'var(--mat1t)',t:'In-cab HMI (VT, VCE) involves safety-critical UI — ISO 15008, glove-first touch targets (44×44mm min), daylight-legible contrast, one-handed operation. AI generates variants; human judgment sets the safety bar.'},{badge:'Maturity signal',bc:'var(--mat4)',bt:'var(--mat4t)',t:'At maturity 4, design components in Figma are linked to journey steps in the service blueprint. When a journey step changes, affected screens are immediately visible — reducing rework and misalignment downstream.'}],recTools:[{n:`Claude`,why:`Microcopy and content design at a quality level that makes a measurable difference — especially for safety-critical copy (warnings, confirmations, error states) where tone and clarity matter most.`},{n:`Framer`,why:`High-fidelity interactive prototypes for research sessions — supports animations and interactions that static Figma prototypes cannot replicate, closer to the real product experience.`}]},
+
+{id:'sp06',diamond:'c',num:'06',name:'Validation & User Testing',sub:'Proving value before building at scale',ai:40,stakeholder:4,okrs:['p','j'],
+journey:{activity:'Validate against journey intent',artifactIn:'Journey-aligned design and prototype from Design phase',artifactOut:'Validated journey evidence · Updated evidence links · Friction map per journey step',forums:[],forumDetails:[],tool:'TheyDo'},
+aiCtx:{deposits:'Validated TO-BE · Tested assumptions · Remaining open questions · Confidence level',drawsFrom:'TO-BE vision + constraints from Concept · Pain point evidence from Research',aiRole:'Compares test findings against original pain points. Confirms which pain points the validated concept addresses and which remain open. Outputs confidence-tagged TO-BE.',schema:['validated_to_be','resolved_pain_points[]','open_questions[]','confidence_level']},
+trackContext:{new:`Concept validation with target users who have no prior exposure to the product. Testing assumptions and directions, not a finished product. Expect significant findings that change direction.`,cti:`Validation with existing users who already have context and expectations. Testing proposed changes against their current experience. The bar is improvement, not just viability.`,cbi:`Usability testing on near-production builds. The question is whether it works as intended, not whether the concept is right. Findings feed directly into the current sprint or the next.`},
+tbu:[{id:'think',label:'Think It',secondary:true,desc:'Concept validation — testing whether a direction is worth investing in before committing to detailed design or build.'},{id:'build',label:'Build It',active:true,desc:'Primary home — in-sprint usability testing validates design decisions before they become expensive code.'},{id:'use',label:'Use It',active:true,desc:'Continuous usability testing on live products — evaluating improvements and catching regressions in the Grow phase.'},{id:'recycle',label:'RecycleIT',active:false,secondary:true,desc:'Validation applies in RecycleIT — testing the offboarding experience to ensure the sunset is considered and retention opportunities are not missed.'}],
+aiTasks:[{t:'Session recording analysis',d:'Maze and Copilot auto-summarise usability recordings, flag moments of friction at scale'},{t:'Heatmap & click-stream processing',d:'Aggregate behavioural data across large participant sets — surface patterns humans would miss'},{t:'A/B test statistical analysis',d:'Process significance, lift, and confidence intervals — AI handles the maths, humans handle the interpretation'},{t:'Survey response auto-coding',d:'Copilot quantifies open-text feedback from post-session surveys'},{t:'Accessibility audit scanning',d:'Automated WCAG 2.2 checks on prototypes before human review'},
+{t:'TheyDo Journey AI — Validation cross-reference',d:'Compares test findings against journey pain points from research; surfaces which touchpoint issues remain unresolved after validation'}
+],
+tools:[{n:'Maze',cls:'res',d:'Unmoderated prototype testing at scale — dealer and operator populations across regions'},{n:'Dovetail',cls:'res',d:'AI-tagged observation notes, insight synthesis across all test rounds — linked to journey evidence'},{n:'FigJam',cls:'col',d:'Research readout sessions — presenting findings to stakeholders and teams'},{n:'Copilot',cls:'llm',d:'Synthesise findings into prioritised insight reports and design recommendations'},{n:'Mural',cls:'col',d:'Collaborative insight workshops — cross-brand teams synthesising validation findings'},
+{n:'TheyDo',cls:'jm',d:'Journey management — map and mine journeys, capture and tag insights, prioritise opportunities, connect to OKRs',url:'https://www.theydo.com'}
+],
+huTasks:[{t:'Recruiting the right participants',d:'Getting actual excavator operators, Mack drivers, or VCE mechanics — not just convenient or available users'},{t:'Moderating usability sessions',d:'Building trust in 5 minutes to get honest feedback — a human skill AI cannot replicate'},{t:'Reading non-verbal signals',d:'A participant who says "it\ fine" while hesitating for 8 seconds — the human facilitator catches this'},{t:'Updating journey evidence links',d:'Tagging validated findings back to journey steps — keeping the AS-IS artifact current for governance forums'},{t:'Pivot vs. persist judgment',d:'When testing reveals a fundamental flaw — deciding to reframe vs. iterate requires courage and experience'}],
+skills:['Facilitation & moderation','Research synthesis','Data interpretation','Participant empathy','Stakeholder communication','Journey evidence management'],
+volvo:[{badge:'Access',bc:'var(--mat1)',bt:'var(--mat1t)',t:'Testing with real operators is logistically complex — coordinate with dealer networks and fleet customers. Build a standing participant panel across regions. Internal tools research faces political resistance from teams who don\ want bad UX surfaced.'},{badge:'Safety-critical',bc:'var(--mat3)',bt:'var(--mat3t)',t:'For HMI and safety-adjacent interfaces, validation must include expert review from safety engineers and ISO compliance checking (ISO 26262 for automotive, ISO 13849 for machinery).'},{badge:'Maturity signal',bc:'var(--mat4)',bt:'var(--mat4t)',t:'At maturity 4, validation is embedded in every sprint — continuous testing panels mean you\e always learning. Journey evidence links are updated automatically as findings are tagged in Dovetail.'}],recTools:[{n:`Lookback`,why:`Live moderated research sessions with screen and face recording — especially useful for remote operator research in depots and cabs across multiple countries.`},{n:`Claude`,why:`Research synthesis and prioritised insight reporting at a quality level that transforms raw findings into actionable design recommendations faster and more accurately than Copilot.`}]},
+
+{id:'sp07',diamond:'dv',num:'07',name:'Design System & Handoff',sub:'Building the shared language between design & engineering',ai:50,stakeholder:2,okrs:['p','g'],
+journey:{activity:'Journey artifact as architecture input',artifactIn:'Validated journey evidence · Friction map from Validation',artifactOut:'Journey-linked engineering brief · Cross-team dependency map · Architecture forum input',forums:[{type:'or',text:'Journey artifact enters One Rhythm at the start of each 10-week planning increment — ensuring the journey artifact is visible when sprint scope is agreed and dependencies are sequenced across teams.'},{type:'arch',text:'Journey dependency map surfaces in Architecture forums — ensuring build decisions reflect the agreed TO-BE and preventing rework from misaligned technical decisions.'}],forumDetails:[{type:'or',text:'Journey artifact enters One Rhythm at the start of each 10-week planning increment — ensuring the journey artifact is visible when sprint scope is agreed and dependencies are sequenced across teams.'},{type:'arch',text:'Journey dependency map surfaces in Architecture forums — ensuring build decisions reflect the agreed TO-BE and preventing rework from misaligned technical decisions.'}],tool:'TheyDo'},
+aiCtx:{deposits:'Journey spec schema · Design decision log · Acceptance criteria · Dependencies',drawsFrom:'Validated TO-BE from Concept · Full evidence pack from Understand',aiRole:'Translates validated TO-BE into a structured machine-readable spec. Develop-phase AI receives this directly — no handoff re-briefing required. Surfaces unresolved spec gaps.',schema:['journey_spec','design_decisions[]','acceptance_criteria[]','dependencies[]']},
+trackContext:{new:`Spec from a greenfield — translating a validated concept into the first version of a product requirement. User stories are exploratory and will need significant refinement during build.`,cti:`Spec for a new capability on a live product. Requirements are anchored to an existing system and user expectation. Integration and dependency surface as early concerns.`,cbi:`Detailed spec for features in the current delivery cycle. Requirements are precise, time-constrained, and directly connected to sprint planning. Ambiguity is resolved quickly or descoped.`},
+tbu:[{id:'think',label:'Think It',active:false,desc:''},{id:'build',label:'Build It',active:true,desc:'Primary home — design system handoff is the bridge between design intent and engineering execution across sprints.'},{id:'use',label:'Use It',secondary:true,desc:'Design system updates continue in Use It — especially when Grow phase insights reveal component or pattern gaps.'},{id:'recycle',label:'RecycleIT',active:false,secondary:false,desc:''}],
+aiTasks:[{t:'Component documentation generation',d:'Copilot and Figma AI auto-draft usage guidelines, do/don\ examples, and prop tables from components'},{t:'Design token management',d:'Figma tokens generate design token JSON output — bridging Figma to codebase automatically'},{t:'Accessibility annotation automation',d:'Figma AI auto-generates ARIA, focus order, and contrast annotations for dev handoff'},{t:'Spec sheet generation',d:'Figma Dev Mode produces spacing, sizing, motion, and state documentation from design files'},{t:'Changelog & versioning notes',d:'Copilot generates structured release notes for design system updates'}],
+tools:[{n:'Figma',cls:'des',d:'Primary design system home — tokens, components, patterns, documentation'},{n:'Figma AI',cls:'des',d:'Component documentation, accessibility annotation, spec generation'},{n:'FigJam',cls:'col',d:'Design system documentation sessions, component critique, adoption planning with engineering'},{n:'Copilot',cls:'llm',d:'Component documentation drafts, usage guidelines, accessibility annotation text'},{n:'Microsoft 365',cls:'col',d:'Engineering briefs, dependency maps, stakeholder communication on system changes'}],
+huTasks:[{t:'Design system governance model',d:'Deciding who can extend vs. who must contribute back — federated vs. centralised at Volvo Group scale'},{t:'Cross-brand token architecture',d:'A system allowing brand differentiation (VCE vs. Buses) without fragmenting the group-level foundation'},{t:'Engineering alignment',d:'Building genuine partnership with frontend engineers — not throwing specs over a wall'},{t:'Adoption & change management',d:'Getting designers and engineers across Volvo Group\ multiple brands to actually use the system — education, evangelism, enforcement'},{t:'Accessibility standards ownership',d:'Setting and holding the bar for what accessible means across all Volvo Group products'}],
+skills:['Design systems architecture','Cross-team leadership','Developer empathy','Accessibility standards','Governance design','Technical communication'],
+volvo:[{badge:'Scale challenge',bc:'var(--mat1)',bt:'var(--mat1t)',t:'Volvo Group\ design system must serve radically different surfaces: ruggedised in-cab HMI, dealer portals, e-commerce, mobile, XR. A layered architecture — foundation → brand → surface — is the only viable model at this scale.'},{badge:'Org model',bc:'var(--mat3)',bt:'var(--mat3t)',t:'Recommended: centralised foundation (Group-level) + federated brand extensions (VCE, VT, Mack, Buses, Penta each own brand tokens). Federated contributions flow back to centre. One Rhythm tracks adoption metrics across brands.'},{badge:'Maturity signal',bc:'var(--mat4)',bt:'var(--mat4t)',t:'At maturity 4, design system components are linked to journey steps. When a journey step changes, affected components are surfaced automatically. Architecture forums use this dependency map to plan technical decisions.'}],recTools:[{n:`Zeroheight`,why:`Design system documentation portal accessible to all brands, engineering teams, and agency partners — bridges the gap between Figma components and a living, searchable design system reference.`},{n:`Supernova`,why:`Design token management and automated design-to-code pipeline — ensures design system tokens flow from Figma to codebase without manual handoff steps.`}]},
+
+{id:'sp08',diamond:'dv',num:'08',name:'Development & Build',sub:'Translating design intent into production code',ai:65,stakeholder:2,okrs:['p'],
+journey:{activity:'Build to journey specification',artifactIn:'Journey-linked engineering brief · Dependency map from Handoff',artifactOut:'Journey-ready product increment · Build decisions log',forums:[{type:'arch',text:'Architecture forum tracks build decisions against the journey spec — surfacing deviations before they become rework. Any decision changing the user-facing journey must be flagged to the journey owner before merging.'}],forumDetails:[{type:'arch',text:'Architecture forum tracks build decisions against the journey spec — surfacing deviations before they become rework. Any decision changing the user-facing journey must be flagged to the journey owner before merging.'}]},
+aiCtx:{deposits:'Design tokens · Component decisions · Edge case catalogue · VGDS references',drawsFrom:'Journey spec from Specification · Constraints from Concept · VGDS token set',aiRole:'Generates UI components from VGDS already mapped to journey spec. Flags component decisions that deviate from spec intent. Builds edge case catalogue from spec gaps.',schema:['design_tokens','component_log[]','edge_cases[]','vgds_references[]']},
+trackContext:{new:`Establishing visual and interaction patterns for a new product. Design system contributions are foundational — decisions made here set the standard for everything that follows.`,cti:`Evolving established patterns for a new capability. The design system is a constraint and a resource. The work is about extending consistently rather than creating from scratch.`,cbi:`In-sprint design decisions within an established system. The focus is on quality, handoff accuracy, and resolving edge cases. Design system contributions are incremental.`},
+tbu:[{id:'think',label:'Think It',active:false,desc:''},{id:'build',label:'Build It',active:true,desc:'This is the heart of Build It — design and engineering work in close collaboration across iterative sprints.'},{id:'use',label:'Use It',secondary:true,desc:'Continues into Use It when the product is live — iterating based on live data without stopping the release cadence.'},{id:'recycle',label:'RecycleIT',active:false,secondary:false,desc:''}],
+aiTasks:[{t:'UI variant generation in Figma Make',d:'Generate high-fidelity screen variants from design system components and text briefs throughout sprints'},{t:'Microsoft Copilot code assistance',d:'Copilot in Microsoft dev environments accelerates component code generation from design specs'},{t:'Figma Dev Mode spec generation',d:'Auto-generate component specs, CSS values, and handoff documentation from Figma components'},{t:'PR summaries & documentation',d:'Copilot auto-generates pull request descriptions, API docs, and changelog entries'},{t:'Accessibility annotation',d:'Figma AI produces ARIA and focus order annotations — reducing manual annotation overhead significantly'}],
+tools:[{n:'Figma',cls:'des',d:'Design-to-code inspection — Dev Mode provides component specs, CSS values, and assets for engineering'},{n:'Figma Make',cls:'des',d:'Generate high-fidelity screen variants rapidly within design system constraints'},{n:'Copilot',cls:'dev',d:'Code generation and scaffolding — Microsoft Copilot embedded in the engineering development environment'},{n:'Figma AI',cls:'des',d:'Accessibility annotation, spec generation, component suggestion during build sprints'},{n:'Microsoft 365',cls:'col',d:'Sprint planning, backlog management, engineering communication and documentation'}],
+huTasks:[{t:'Interaction design intent',d:'Defining how the product communicates — pacing, feedback, affordance, animation intent that AI cannot determine'},{t:'Journey-step-to-screen accountability',d:'Ensuring every screen maps to a specific TO-BE journey step — maintaining journey accountability through build'},{t:'Design system governance',d:'Deciding when to extend vs. respect existing patterns — requires system-level thinking and brand judgment'},{t:'Edge case & error state design',d:'The 20% of states defining 80% of trust — safety-critical for HMI, legally significant for dealer tools'},{t:'Journey deviation flagging',d:'When a build decision changes the user-facing experience, flagging it to the journey owner before merging'}],
+skills:['Interaction design','Information architecture','Design systems thinking','Technical understanding','Accessibility design','Journey-aware engineering'],
+volvo:[{badge:'HMI complexity',bc:'var(--mat1)',bt:'var(--mat1t)',t:'In-cab HMI (VT, VCE) involves safety-critical UI — ISO 15008, glove-first touch targets (44×44mm minimum), daylight-legible contrast, one-handed operation. Copilot generates code; human judgment sets the safety bar.'},{badge:'Design-dev gap',bc:'var(--mat2)',bt:'var(--mat2t)',t:'The biggest UX maturity lever here is closing the design-engineering collaboration gap. Embed UX engineers in product teams. Make design tokens the single source of truth for both Figma and code.'},{badge:'Maturity signal',bc:'var(--mat4)',bt:'var(--mat4t)',t:'At maturity 4, design tokens flow from Figma to production via automated pipelines. Designers can preview their components in live staging without raising a ticket. Design and code are continuously integrated.'}],recTools:[{n:`Cursor`,why:`AI-first code editor for UX engineers working in design-to-code contexts — significantly accelerates the gap-closing work between Figma intent and production implementation.`},{n:`Claude`,why:`Complex code explanation, architecture Q&A, and design-to-code reasoning — particularly valuable for UX engineers and designers working at the code boundary.`}]},
+
+{id:'sp09',diamond:'dv',num:'09',name:'QA, Accessibility & Launch',sub:'Ensuring quality and responsible go-live',ai:60,stakeholder:3,okrs:['p'],
+journey:{activity:'Journey checkpoint · Launch sign-off',artifactIn:'Journey-ready product increment from Development',artifactOut:'Launch-validated journey artifact · Go-live evidence · Post-launch monitoring brief',forums:[],forumDetails:[],tool:'TheyDo'},
+aiCtx:{deposits:'QA results · Spec deviations · Performance baselines · Launch scope',drawsFrom:'Full journey spec · Component log · Acceptance criteria from Define',aiRole:'Validates build against journey spec and acceptance criteria. Generates performance baselines from spec intent — these become the targets Grow phase AI monitors against.',schema:['qa_results[]','spec_deviations[]','performance_baselines','launch_scope']},
+trackContext:{new:`First launch of a new product — higher stakes, more unknowns. QA needs to cover more ground. Launch planning includes establishing baseline metrics that don't yet exist.`,cti:`Launching a significant new capability on a live product. Users have expectations from existing experience. Regression risk is high and needs to be explicitly managed.`,cbi:`Routine launch cadence within continuous delivery. QA is incremental, baselines exist, metrics are already defined. The focus is on consistency and speed rather than breadth.`},
+tbu:[{id:'think',label:'Think It',active:false,desc:''},{id:'build',label:'Build It',active:true,desc:'QA and accessibility gates close out Build It before a release. Launch is the formal handover from build to use.'},{id:'use',label:'Use It',secondary:true,desc:'QA cycles continue in Use It — especially regression testing after iterative improvements in the Grow phase.'},{id:'recycle',label:'RecycleIT',active:false,secondary:true,desc:'Launch in RecycleIT is the intentional end-of-service moment — accessible, clearly communicated, and designed as a considered final experience.'}],
+aiTasks:[{t:'Automated test suite execution',d:'Run unit, integration, and E2E tests across platforms and browsers — at a scale no manual testing can match'},{t:'WCAG 2.2 compliance scanning',d:'Automated accessibility checks across all pages and components before human expert review'},{t:'Visual regression testing',d:'Pixel-diff every component against design baseline — catch unintended changes between releases'},{t:'Performance regression detection',d:'Lighthouse, Core Web Vitals, bundle size monitoring in CI/CD — automated per pull request'},{t:'Launch checklist generation',d:'Copilot generates go-live checklist from design spec, risk assessment, and prior launch templates'}],
+tools:[{n:'Figma',cls:'des',d:'Final design spec review — ensuring what shipped matches design intent before sign-off'},{n:'Copilot',cls:'llm',d:'Accessibility audit triage, launch risk assessment, stakeholder briefing documents'},{n:'Maze',cls:'res',d:'Final pre-launch usability check — rapid unmoderated test before release'},{n:'Microsoft 365',cls:'col',d:'Launch communication, change management documentation, internal training materials'},{n:'FigJam',cls:'col',d:'Launch readiness reviews and go/no-go checkpoint facilitation'}],
+huTasks:[{t:'Real-device & assistive tech testing',d:'Screen reader (NVDA, JAWS, VoiceOver), keyboard-only, high-contrast — automated tools miss 40% of a11y issues'},{t:'Journey end-to-end sign-off',d:'The journey owner validates that the shipped experience matches the agreed TO-BE vision — the final governance gate'},{t:'Expert accessibility review',d:'A qualified a11y specialist must sign off — especially for public-sector-adjacent products under the EU Accessibility Act'},{t:'Go / no-go launch decision',d:'Senior sign-off from UX lead, product owner, and engineering lead — a human gate, not an automated one'},{t:'Launch communication design',d:'Communicating a new tool to internal users or a global dealer network requires human craft and change management'}],
+skills:['Accessibility expertise','QA judgment','Risk assessment','Change management','Launch communication','Journey sign-off authority'],
+volvo:[{badge:'EAA compliance',bc:'var(--mat3)',bt:'var(--mat3t)',t:'Volvo Group must comply with the EU Accessibility Act from 2025. Internal tools with 10+ users, dealer portals, and public websites are all in scope. Non-compliance is a legal risk, not just a UX issue.'},{badge:'Internal launch',bc:'var(--mat1)',bt:'var(--mat1t)',t:'Internal tool launches (SAP configurators, maintenance tools) require proper change management — training, communication, helpdesk support. Treat these like product launches, not IT rollouts.'},{badge:'Journey gate',bc:'var(--mat4)',bt:'var(--mat4t)',t:'At maturity 4, the journey owner\ sign-off is a mandatory launch gate. If the shipped experience diverges from the TO-BE vision without documented reason, launch is blocked until the journey artifact is updated.'}],recTools:[{n:`Axe DevTools Pro`,why:`WCAG 2.2 automated scanning integrated into CI/CD — essential for EU Accessibility Act compliance across dealer portals, internal tools, and public web under the 2025 deadline.`},{n:`LaunchDarkly`,why:`Feature flagging for controlled rollouts by region or user group — enables phased launch strategies essential for a global organisation where a big-bang release creates unacceptable risk.`}]},
+
+{id:'sp10',diamond:'g',num:'10',name:'Analytics, Growth & Continuous Learning',sub:'Turning live data into the next discovery cycle',ai:60,stakeholder:3,okrs:['p','j','g'],
+journey:{activity:'Journey performance · Feed next cycle',artifactIn:'Launch evidence · Post-launch monitoring brief from QA & Launch',artifactOut:'Journey KPIs per step · Performance insight loop · Next Discovery brief · Updated journey artifact',forums:[{type:'or',text:'Journey performance data enters One Rhythm — linking UX outcome metrics to business decisions and next-cycle sequencing. Journey owners present KPIs alongside product metrics.'},{type:'arch',text:'Architecture forum reviews live journey performance — surfacing technical dependencies, platform debt, and system decisions needed for the next improvement cycle.'}],forumDetails:[{type:'or',text:'Journey performance data enters One Rhythm — linking UX outcome metrics to business decisions and next-cycle sequencing. Journey owners present KPIs alongside product metrics.'},{type:'arch',text:'Architecture forum reviews live journey performance — surfacing technical dependencies, platform debt, and system decisions needed for the next improvement cycle.'}],tool:'TheyDo'},
+aiCtx:{deposits:'KPI actuals · Spec-vs-live delta · Resolved pain points · Sunset indicators',drawsFrom:'Performance baselines from Develop · Journey spec from Define · Original pain points from Understand',aiRole:'Compares live performance against designed intent using the full accumulated context. Surfaces drift between what was designed and how it is used. Identifies which original pain points were truly resolved. Generates RecycleIT signal when thresholds are crossed.',schema:['kpi_actuals','spec_vs_live_delta','resolved_pain_points[]','sunset_indicators[]']},
+trackContext:{new:`Establishing the measurement baseline for a new product. No prior data — the goal is to define what good looks like and begin collecting evidence to validate or challenge that definition.`,cti:`Comparing new capability performance against established baselines. You have historical data — the question is whether the new investment moved the metrics that matter.`,cbi:`Continuous monitoring of an active product. Analytics feed directly into prioritisation decisions for the next cycle. The signal-to-noise question is critical — what actually needs attention.`},
+tbu:[{id:'think',label:'Think It',secondary:true,desc:'Grow feeds Think It continuously — performance data and journey insights from live products inform the next discovery cycle.'},{id:'build',label:'Build It',secondary:true,desc:'Grow insights inform Build It priorities — surfacing which improvements enter the next sprint and which need a full diamond cycle.'},{id:'use',label:'Use It',active:true,desc:'Primary home — Use It is defined by continuous learning from live product data, user behaviour, and feedback.'},{id:'recycle',label:'RecycleIT',active:true,secondary:false,desc:'RecycleIT is closely connected to Grow — lifecycle performance data informs the User Sunset Strategy, identifies retention opportunities, and generates insights for successor products.'}],
+aiTasks:[{t:'Analytics processing & anomaly detection',d:'Copilot surfaces drop-offs, errors, and friction patterns at a scale and speed no manual analysis can match'},{t:'Session recording synthesis',d:'Copilot summarises session recordings — identifying recurring friction patterns across user populations'},{t:'NPS & CSAT analysis',d:'Copilot synthesises sentiment trends across dealer surveys, operator feedback, and support tickets'},{t:'Journey step performance tracking',d:'Map analytics events to TO-BE journey steps — showing which steps are performing vs. underperforming'},{t:'Automated insight reports',d:'Copilot generates weekly performance summaries — reducing manual reporting overhead for leads significantly'},
+{t:'TheyDo Journey AI — Continuous journey mining',d:'Mines live customer feedback and analytics data into structured journey insights; scores and prioritises opportunities for the next cycle'}
+],
+tools:[{n:'Copilot',cls:'llm',d:'Analytics interpretation, insight report generation, stakeholder update drafts, OKR reporting'},{n:'Dovetail',cls:'res',d:'Connect post-launch learnings back to original research themes and AS-IS journey evidence in the repository'},{n:'FigJam',cls:'col',d:'Continuous improvement workshops — retrospectives, prioritisation sessions, next-cycle planning'},{n:'Maze',cls:'res',d:'Continuous usability testing on live product — closing the feedback loop between release and insight'},{n:'Microsoft 365',cls:'col',d:'Performance reporting to stakeholders, OKR tracking, leadership updates with journey KPIs'},
+{n:'TheyDo',cls:'jm',d:'Journey management — map and mine journeys, capture and tag insights, prioritise opportunities, connect to OKRs',url:'https://www.theydo.com'}
+],
+huTasks:[{t:'Interpreting data in human context',d:'A 23% drop-off at step 3 means nothing without knowing why — qualitative investigation bridges the analytics gap'},{t:'Presenting to One Rhythm & Architecture',d:'Translating journey KPIs into governance language that drives business decisions, not just design ones'},{t:'Updating the journey artifact',d:'As performance reveals gaps between TO-BE and live reality, the journey owner updates the artifact and initiates the next Understand cycle'},{t:'Strategic prioritisation',d:'Deciding which insights become backlog items, which need a full diamond cycle, and which signal a fundamental problem'},{t:'Connecting data to lived experience',d:'Bridging analytics with qualitative research — the why behind the what that only humans can make'}],
+skills:['Data literacy & interpretation','Strategic storytelling','Journey performance management','Continuous improvement','Research-analytics integration','Executive communication'],
+volvo:[{badge:'UX metrics',bc:'var(--mat2)',bt:'var(--mat2t)',t:'Define UX KPIs that matter to leadership: task success rate, error rate, time-on-task, SUS score, NPS by user group. Make UX performance visible alongside business metrics at One Rhythm. This is what earns the DxD Function strategic influence over time — and it is the evidence base for performance conversations that are currently too ad hoc. UX KPIs per journey step give both function leads and domain heads a shared language for what good delivery looks like.'},{badge:'Forum presence',bc:'var(--mat3)',bt:'var(--mat3t)',t:'Journey performance data presented at One Rhythm and Architecture forums is the most powerful signal of UX maturity. It demonstrates that UX is a strategic capability driving business outcomes — not a service function doing what it\ told.'},{badge:'Maturity signal',bc:'var(--mat4)',bt:'var(--mat4t)',t:'At maturity 5, analytics, research, and journey management are integrated in real time. The journey owner reviews performance continuously, the journey artifact is always current, and the next Understand brief emerges automatically from performance signals.'}],recTools:[{n:`Amplitude`,why:`Product analytics purpose-built for UX insight — funnels, retention, journey-step mapping, and behavioural cohorts that Copilot alone cannot provide from raw data.`},{n:`Claude`,why:`Analytics interpretation, journey performance narrative, and stakeholder insight report generation — turning raw data into decision-ready intelligence for One Rhythm and Architecture forums.`}]}
+];
+
+const DIAMONDS=[
+{id:'u',diamond:'Understand',sub:'Identify the problem',ai:30,stakeholder:5,okrs:['p','j'],spIds:['sp01','sp02','sp03'],
+intro:'Understand is about gathering as much information as possible about users, their needs, the context of the problem, and any associated constraints. It sets the foundation for defining the right problem to solve. This diamond contains three sub-phases — each can be present in any organisational stage with different weight.',
+journey:{activity:'Evidence gathering · AS-IS mapping · Problem framing',artifactOut:'Evidence repository · AS-IS journey map · TO-BE vision · Journey owner assigned',forums:['or'],forumDetails:[{type:'or',text:'The TO-BE vision produced in Problem Framing enters One Rhythm here — sequencing delivery and surfacing cross-domain dependencies.'}]},
+aiCtx:{deposits:'Pain points · User needs · Journey scope · Evidence links',drawsFrom:'None — context layer initialised here',aiRole:'Structures research into a machine-readable evidence pack. Tags pain points by severity, frequency, and journey step. No re-briefing needed in subsequent phases.'},
+tbu:[{id:'think',label:'Think It',active:true,desc:'Primary home — Understand generates the evidence and framing that Think It decisions are built on.'},{id:'build',label:'Build It',secondary:true,desc:'Understand sub-phases frequently recur in Build It — especially when new complexity surfaces or requirements shift.'},{id:'use',label:'Use It',secondary:true,desc:'Research and problem framing return in Use It to deepen understanding of live products before next improvement cycles.'},{id:'recycle',label:'RecycleIT',active:false,secondary:true,desc:'Research and problem framing can operate in RecycleIT — gathering insights toward a User Sunset Strategy.'}]},
+{id:'c',diamond:'Concept',sub:'Find the right solution',ai:50,stakeholder:3,okrs:['p','g'],spIds:['sp04','sp05','sp06'],
+intro:'Concept focuses on ideation, generating a wide range of potential solutions, and testing ideas through prototyping. The concepts are refined based on user feedback to reduce the risk of building solutions that don\ meet user needs. All three sub-phases typically run in iterative cycles rather than in strict sequence.',
+journey:{activity:'TO-BE concept scenarios · Design to journey spec',artifactOut:'Concept scenarios · Journey-aligned design · Validated journey evidence',forums:[],forumDetails:[]},
+aiCtx:{deposits:'TO-BE vision · Concept direction · Design constraints · Rationale',drawsFrom:'Evidence pack from Understand: pain points, needs, journey scope',aiRole:'Generates concept variants already informed by surfaced pain points. Flags directions that conflict with known constraints or ignore evidence.'},
+tbu:[{id:'think',label:'Think It',active:true,desc:'Strong overlap — concepting and validated prototypes are what Think It produces as evidence of a viable direction.'},{id:'build',label:'Build It',active:true,desc:'Concept sub-phases continue through Build It — especially detailed design and in-sprint validation cycles.'},{id:'use',label:'Use It',secondary:true,desc:'Design iteration on live products — concepting improvements informed by Grow phase analytics and user feedback.'},{id:'recycle',label:'RecycleIT',active:false,secondary:false,desc:''}]},
+{id:'df',diamond:'Define',sub:'Detail scope & roadmap',ai:35,stakeholder:5,okrs:['p','j'],spIds:[],
+intro:'Define is where the team decides to move forward and invest in building a validated solution. This phase moves to detailed definition and planning — user story mapping, creating the roadmap, feasibility assessment, and prioritisation. Define is the decision gate between divergent exploration and convergent development.',
+journey:{activity:'Map AS-IS · Agree TO-BE · Journey review for next cycle',artifactOut:'AS-IS/TO-BE journey map · Linked evidence · Value-based roadmap · Prioritised backlog',forums:['or'],forumDetails:[{type:'or',text:'The Define diamond is the primary governance moment. The AS-IS/TO-BE journey pair enters One Rhythm here — sequencing delivery, surfacing cross-domain dependencies, and connecting journey progress to sprint planning across brands.'}]},
+aiCtx:{deposits:'Journey spec schema · Decision log · Design tokens · Acceptance criteria',drawsFrom:'TO-BE vision + constraints from Concept · Evidence pack from Understand',aiRole:'Translates journey intent into structured specifications. Produces a spec Develop AI can consume directly — no handoff re-briefing.'},
+tbu:[{id:'think',label:'Think It',active:true,desc:'The natural output of Think It — Define produces the scope, roadmap, and investment case before development begins.'},{id:'build',label:'Build It',secondary:true,desc:'Define recurs at the start of significant new build phases — ensuring scope is current and journey artifact is accurate.'},{id:'use',label:'Use It',active:false,desc:''},{id:'recycle',label:'RecycleIT',active:false,secondary:true,desc:'Define applies in RecycleIT when scoping the sunset — defining the offboarding experience and success criteria.'}]},
+{id:'dv',diamond:'Develop',sub:'Agile software development',ai:55,stakeholder:2,okrs:['p'],spIds:['sp07','sp08','sp09'],
+intro:'Develop is where design works closely with product and development teams. Focus shifts from planning to iterative design, development, and delivery. The team continues to collect feedback from users and measure how well solutions deliver against defined goals and metrics. Three sub-phases run in close coordination throughout sprints.',
+journey:{activity:'Build to journey spec · Backlog mapped to journey steps',artifactOut:'Journey-ready product increment · Build decisions log · Launch-validated artifact',forums:['arch'],forumDetails:[{type:'arch',text:'Architecture forum tracks build decisions against the journey spec throughout the Develop diamond — ensuring technical decisions reflect the agreed TO-BE and flagging deviations back to the journey owner.'}]},
+aiCtx:{deposits:'Build decisions · Edge case log · QA baselines · Launch scope',drawsFrom:'Journey spec + design tokens from Define · TO-BE vision from Concept',aiRole:'Generates and evaluates components against journey spec. Flags deviations from spec intent. Builds performance baselines for Grow phase comparison.'},
+tbu:[{id:'think',label:'Think It',active:false,desc:''},{id:'build',label:'Build It',active:true,desc:'Develop is the heart of Build It — design and engineering in close collaboration across iterative sprints through to launch.'},{id:'use',label:'Use It',secondary:true,desc:'Develop sub-phases continue in Use It — iterating on design and releasing improvements without stopping the release cadence.'},{id:'recycle',label:'RecycleIT',active:false,secondary:false,desc:''}]},
+{id:'g',diamond:'Grow',sub:'Manage and improve',ai:60,stakeholder:3,okrs:['p','j','g'],spIds:['sp10'],
+intro:'Grow is where the team continuously engages with users and stakeholders to test and validate solutions being delivered, understanding how to improve every aspect of the experience and interaction. This diamond feeds directly back into Understand — completing the cycle and initiating the next one.',
+journey:{activity:'Journey KPIs · Decisions informed · Feed next cycle',artifactOut:'Journey KPIs per step · Performance insight loop · Next Understand brief · Updated journey artifact',forums:['or','arch'],forumDetails:[{type:'or',text:'Journey performance data enters One Rhythm — linking UX KPIs to business decisions and next-cycle sequencing.'},{type:'arch',text:'Architecture forum reviews live journey performance — surfacing technical dependencies for the next improvement cycle.'}]},
+aiCtx:{deposits:'KPI actuals · Lifecycle signals · Retention indicators · Sunset cues',drawsFrom:'QA baselines from Develop · Journey spec from Define · Pain points from Understand',aiRole:'Compares live performance against designed intent. Surfaces drift between designed experience and actual usage. Generates RecycleIT signal when lifecycle indicators cross thresholds.'},
+tbu:[{id:'think',label:'Think It',secondary:true,desc:'Grow feeds Think It continuously — performance signals from live products initiate the next discovery brief.'},{id:'build',label:'Build It',secondary:true,desc:'Grow insights inform Build It priorities — surfacing what enters the next sprint or requires a deeper diamond cycle.'},{id:'use',label:'Use It',active:true,desc:'Grow is the heart of Use It — continuous learning from live data, user behaviour, and stakeholder feedback.'},{id:'recycle',label:'RecycleIT',active:true,secondary:false,desc:'Grow feeds directly into RecycleIT — lifecycle performance data drives the User Sunset Strategy and informs what to retain for successor products.'}]}
+];
+
+const SP_MAP={};
+SUB_PHASES.forEach(s=>SP_MAP[s.id]=s);
+const DI_MAP={};
+DIAMONDS.forEach(d=>DI_MAP[d.id]=d);
+
+let selectedDiamond=null, selectedSubPhase=null, activeRole='all', activeOkr=null;
+let currentView='diamond'; // 'diamond' or 'subphase'
+
+// Build AI context lane
+
+
+
+function setTrack(track, btn){
+  document.querySelectorAll('.ctx-pill').forEach(p=>p.classList.remove('ctx-active'));
+  btn.classList.add('ctx-active');
+  window._activeTrack = track;
+  if(selectedSubPhase) openSubPhase(selectedSubPhase);
+}
+const TRACK_LABELS = {
+  new: 'New product',
+  cti: 'Continuous · Think It',
+  cbi: 'Continuous · Build It'
+};
+
+function setDisc(disc,btn){
+  document.querySelectorAll('.disc-pill').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  window._activeDisc=disc;
+  // Re-render open drawer if any
+  if(selectedDiamond) openDiamond(selectedDiamond);
+}
+function discMatch(itemDisc,activeDisc){
+  if(activeDisc==='all') return true;
+  if(itemDisc==='all') return true;
+  return itemDisc===activeDisc;
+}
+
+function toggleAICtx(on){
+  // Swimlane
+  const ctxHeader=document.querySelector('.ai-ctx-header');
+  const ctxRow=document.getElementById('ai-ctx-row');
+  if(ctxHeader)ctxHeader.style.display=on?'flex':'none';
+  if(ctxRow)ctxRow.style.display=on?'flex':'none';
+  // Diamond drawer AI section
+  const dvAi=document.getElementById('dv-ai-ctx');
+  if(dvAi)dvAi.style.display=on?'block':'none';
+  // Sub-phase drawer AI section
+  const spAi=document.getElementById('sp-ai-ctx');
+  if(spAi)spAi.style.display=on?'block':'none';
+}
+
+function buildAIContextLane(){
+  const row=document.getElementById('ai-ctx-row');
+  if(!row)return;
+  DIAMONDS.forEach((di,i)=>{
+    if(i>0){const c=document.createElement('div');c.className='ai-ctx-conn';c.innerHTML='›';row.appendChild(c);}
+    const node=document.createElement('div');
+    node.className='ai-ctx-node';
+    node.style.width=di.id==='df'?'200px':'230px';
+    node.onclick=()=>openDiamond(di.id);
+    const ctx=di.aiCtx||{};
+    const dep=ctx.deposits||'';
+    const fr=ctx.drawsFrom||'';
+    const dispDep=dep.length>55?dep.substring(0,53)+'…':dep;
+    const dispFr=fr.length>55?fr.substring(0,53)+'…':fr;
+    node.innerHTML=`<div class="ai-ctx-deposits">⊕ ${dispDep}</div>${fr&&fr!='None — context layer initialised here'?`<div class="ai-ctx-draws">← ${dispFr}</div>`:'<div class="ai-ctx-draws" style="opacity:.5;font-style:italic">context layer begins here</div>'}`;
+    row.appendChild(node);
+  });
+}
+
+function buildJourneyThread(){
+  const row=document.getElementById('jb-row');
+  DIAMONDS.forEach((di,i)=>{
+    if(i>0){const c=document.createElement('div');c.className='jt-conn';c.innerHTML='›';row.appendChild(c);}
+    const node=document.createElement('div');
+    const hasForum=di.journey.forums.length>0;
+    node.className=`jt-node${hasForum?' has-forum':''}`;
+    node.id=`jt-${di.id}`;
+    node.style.width=di.id==='df'?'200px':'230px';
+    node.onclick=()=>openDiamond(di.id);
+    const fHtml='';
+    node.innerHTML=`<div class="jt-act">${di.journey.activity}</div><div class="jt-art">${di.journey.artifactOut.split('·')[0].trim()}</div>${fHtml?`<div class="jt-forums">${fHtml}</div>`:''}`;
+    row.appendChild(node);
+  });
+}
+
+function buildTrack(){
+  const track=document.getElementById('track');
+  DIAMONDS.forEach((di,i)=>{
+    if(i>0){const a=document.createElement('div');a.className='ph-arrow';a.innerHTML='›';track.appendChild(a);}
+    const card=document.createElement('div');
+    card.className=`ph ${di.id}`;card.id=`ph-${di.id}`;card.onclick=()=>openDiamond(di.id);
+    const stkDots=Array.from({length:5},(_,j)=>`<div class="stk-dot${j>=di.stakeholder?' lo':''}"></div>`).join('');
+    const okrTags=di.okrs.map(o=>`<span class="okr-tag ${o}">${{p:'Practices',j:'Journey',g:'Growth'}[o]}</span>`).join('');
+    // Get key tools from first sub-phase
+    const firstSp=di.spIds.length>0?SP_MAP[di.spIds[0]]:null;
+    const toolsHtml=firstSp?firstSp.tools.slice(0,4).map(t=>`<span class="ph-sp-tool dr-tc ${TC[t.cls]||''}" style="font-size:11px;padding:1px 4px">${t.n}</span>`).join(''):'';
+    const spList=di.spIds.length>0
+      ?`<div class="ph-sp-label">Sub-phases</div>`+di.spIds.map((sid,si)=>{
+        const sp=SP_MAP[sid];
+        return `<div class="ph-sp-chip" onclick="event.stopPropagation();openSubPhase('${sid}')"><span class="ph-sp-n">${sp.num}</span><span>${sp.name}</span><div style="display:flex;gap:2px;margin-top:2px">${sp.tbu.map(t=>`<span style="font-size:11px;font-family:'Volvo Novum',sans-serif;${t.active?'color:var(--ai-t)':t.secondary?'color:var(--txt3);opacity:.6':'opacity:.25;color:var(--txt3)'}">${t.active?'●':t.secondary?'◐':'○'}</span>`).join('')}</div></div>`;
+      }).join('')
+      :`<div class="ph-sp-label" style="color:var(--di-${di.id})">Decision gate — no sub-phases</div>`;
+    card.innerHTML=`
+      <div class="ph-head">
+        <div class="ph-badge">${di.diamond}</div>
+        <div class="ph-name">${di.sub}</div>
+        <div class="ph-bal"><div class="ph-bal-ai" style="width:${di.ai}%"></div><div class="ph-bal-hu" style="width:${100-di.ai}%"></div></div>
+        <div class="ph-stk"><div class="stk-label">Stakeholder weight</div>${stkDots}</div>
+        <div class="okr-tags">${okrTags}</div>
+      </div>
+      <div class="ph-sub-phases">${spList}</div>
+      <div class="ph-hint">↗ click for detail</div>`;
+    track.appendChild(card);
+  });
+}
+
+function setRole(r,btn){
+  activeRole=r;
+  ['r-all','r-ai','r-hu'].forEach(id=>document.getElementById(id).classList.remove('on'));
+  btn.classList.add('on');
+}
+
+function toggleOkr(o,btn){
+  if(activeOkr===o){activeOkr=null;btn.classList.remove('on-p','on-j','on-g');}
+  else{
+    activeOkr=o;
+    ['okr-p','okr-j','okr-g'].forEach(id=>document.getElementById(id).classList.remove('on-p','on-j','on-g'));
+    btn.classList.add(`on-${o}`);
+  }
+  DIAMONDS.forEach(di=>{
+    const dim=activeOkr&&!di.okrs.includes(activeOkr);
+    document.getElementById(`ph-${di.id}`).classList.toggle('dim',dim);
+    const jt=document.getElementById(`jt-${di.id}`);
+    if(jt){jt.style.opacity=dim?'0.15':'1';jt.style.pointerEvents=dim?'none':'auto';}
+  });
+}
+
+function setDrawerHead(badge,badgeBg,badgeCol,name,sub,okrs,aiPct){
+  const b=document.getElementById('dr-badge');
+  b.textContent=badge;b.style.background=badgeBg;b.style.color=badgeCol;b.style.border=`1px solid ${badgeCol}22`;
+  document.getElementById('dr-name').textContent=name;
+  document.getElementById('dr-sub').textContent=sub;
+  document.getElementById('dr-meta').innerHTML=
+    okrs.map(o=>`<span class="dr-okr ${o}">${{p:'OKR 1 · Practices',j:'OKR 2 · Journey',g:'OKR 3 · Growth'}[o]}</span>`).join('')+
+    (aiPct?`<span class="dr-ai-pct">AI lean: ${aiPct}% · Human: ${100-aiPct}%</span>`:'');
+}
+
+function showView(v){
+  currentView=v;
+  document.getElementById('view-diamond').classList.toggle('vis',v==='diamond');
+  document.getElementById('view-subphase').classList.toggle('vis',v==='subphase');
+  document.getElementById('dr-back').classList.toggle('vis',v==='subphase');
+  const navInline=document.getElementById('dr-nav-inline');
+  if(navInline) navInline.style.display=v==='subphase'?'flex':'none';
+}
+
+function renderTbu(cards,containerId){
+  document.getElementById(containerId).innerHTML=cards.map(t=>{
+    const cls=t.active?'active':t.secondary?'secondary':'';
+    return `<div class="dr-tbu-card ${cls}"><div class="dr-tbu-n">${t.label}</div><div class="dr-tbu-d">${t.desc||`Not typical for this diamond.`}</div></div>`;
+  }).join('');
+}
+
+function renderForums(forumDetails,containerId){
+  const el=document.getElementById(containerId);
+  el.innerHTML=forumDetails.length===0
+    ?`<div class="dr-no-forum">No direct governance forum input at this point</div>`
+    :forumDetails.map(f=>`<div class="dr-fi ${f.type}"><span class="dr-fb">${{or:'One Rhythm',arch:'Architecture'}[f.type]}</span><span class="dr-fd">${f.text}</span></div>`).join('');
+}
+
+function openDiamond(id){
+  selectedDiamond=id;
+  selectedSubPhase=null;
+  const di=DI_MAP[id];
+  const dc=DI[id];
+
+  document.querySelectorAll('.ph').forEach(el=>el.classList.remove('sel'));
+  document.querySelectorAll('.jt-node').forEach(el=>el.classList.remove('sel'));
+  document.getElementById(`ph-${id}`).classList.add('sel');
+  document.getElementById(`jt-${id}`).classList.add('sel');
+
+  setDrawerHead(di.diamond,dc.bg,dc.col,di.sub,`${di.diamond} diamond`,di.okrs,di.ai);
+  document.getElementById('dr-crumb').innerHTML=`<span>${di.diamond}</span>`;
+
+  document.getElementById('dv-intro').textContent=di.intro;
+
+  // Render activities and deliverables
+  const actsEl=document.getElementById('dv-activities');
+  const delsEl=document.getElementById('dv-deliverables');
+  const dcData=DIAMOND_CONTENT[di.id];
+  if(dcData&&actsEl&&delsEl){
+    const activeDisc=window._activeDisc||'all';
+    const discLabels={ux:'UX Design',uxr:'UX Research',sd:'Service Design'};
+    actsEl.innerHTML=dcData.activities.map(a=>{
+      const item=typeof a==='object'?a:{t:a,disc:'all'};
+      const hidden=!discMatch(item.disc,activeDisc)?'disc-hidden':'';
+      const badge=item.disc&&item.disc!=='all'?`<span class="disc-badge disc-badge-${item.disc}">${discLabels[item.disc]||item.disc}</span>`:'';
+      return `<div class="disc-item ${hidden}" style="font-size:14px;color:var(--txt2);line-height:1.5;display:flex;gap:7px;align-items:flex-start;padding:2px 0"><span style="color:var(--ai-t);font-size:12.5px;flex-shrink:0;margin-top:3px">→</span><span>${item.t}${badge}</span></div>`;
+    }).join('');
+    delsEl.innerHTML=dcData.deliverables.map(d=>{
+      const item=typeof d==='object'?d:{t:d,disc:'all'};
+      const hidden=!discMatch(item.disc,activeDisc)?'disc-hidden':'';
+      const badge=item.disc&&item.disc!=='all'?`<span class="disc-badge disc-badge-${item.disc}">${discLabels[item.disc]||item.disc}</span>`:'';
+      return `<div class="disc-item ${hidden}" style="font-size:12.5px;padding:2px 9px;border-radius:3px;background:rgba(59,111,232,.12);color:var(--ai-t);border:1px solid rgba(59,111,232,.2);font-family:'Volvo Novum',sans-serif;display:inline-flex;align-items:center;gap:4px">${item.t}${badge}</div>`;
+    }).join('');
+    const methodsGrid=document.getElementById('dv-methods-grid');
+    if(methodsGrid&&dcData.methods){
+      methodsGrid.innerHTML=dcData.methods.map(m=>{
+        const isPlaceholder=m.url==='#';
+        if(isPlaceholder){
+          return `<span class="dr-method-chip placeholder" title="Link coming soon">${m.n}</span>`;
+        }
+        return `<a class="dr-method-chip" href="${m.url}" target="_blank">${m.n}</a>`;
+      }).join('');
+    }
+  }
+
+  // Add foundation skills note after intro
+  const introEl=document.getElementById('dv-intro');
+  introEl.innerHTML=introEl.textContent+'<div style="margin-top:9px;padding:8px 10px;background:rgba(90,90,106,.15);border-radius:6px;border:1px solid rgba(90,90,106,.25);font-size:13px;color:var(--txt3);line-height:1.5"><span style="font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-family:DM Mono,monospace;color:#636570;margin-right:6px">Foundation skills</span>Collaboration, Critical Thinking, Storytelling, User Centricity, Workshop Facilitation, Adaptability, and Organizational Skills apply across all designers in all diamonds — they are not phase-specific.</div>';
+
+  // Sub-phase cards
+  const spContainer=document.getElementById('dv-sp-cards');
+  if(di.spIds.length===0){
+    spContainer.innerHTML=`<div style="font-size:14px;color:var(--txt3);padding:8px 0;font-style:italic">Define is a decision gate — it does not contain sub-phases. Click the card above for the full Define detail.</div>`;
+    document.querySelector('.dr-sp-track .dr-sp-track-label').textContent='Decision gate';
+  } else {
+    document.querySelector('.dr-sp-track .dr-sp-track-label').textContent='Sub-phases — click to drill in';
+    spContainer.innerHTML=di.spIds.map(sid=>{
+      const sp=SP_MAP[sid];
+      const toolChips=sp.tools.slice(0,3).map(t=>`<span class="dr-sp-tool dr-tc ${TC[t.cls]||''}">${t.n}</span>`).join('');
+      return `<div class="dr-sp-card" onclick="openSubPhase('${sid}')">
+        <div class="dr-sp-card-inner">
+          <div class="dr-sp-card-left">
+            <div class="dr-sp-num">Phase ${sp.num}</div>
+            <div class="dr-sp-name">${sp.name}</div>
+            <div class="dr-sp-desc">${sp.sub}</div>
+          </div>
+          <div class="dr-sp-card-right">
+            <div class="dr-sp-bal"><div class="dr-sp-ai" style="width:${sp.ai}%;background:${dc.col}"></div><div class="dr-sp-hu" style="width:${100-sp.ai}%"></div></div>
+            <div class="dr-sp-pct">AI ${sp.ai}% · Human ${100-sp.ai}%</div>
+            <div class="dr-sp-chips">${toolChips}</div>
+          </div>
+          <div class="dr-sp-arrow">›</div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  renderTbu(di.tbu,'dv-tbu-cards');
+  document.getElementById('dv-jm-act').textContent=di.journey.activity;
+  document.getElementById('dv-jm-out').textContent=di.journey.artifactOut;
+  // forum rendering removed
+
+  // AI context layer
+  const _aiD=di.aiCtx||{};
+  const _dDep=document.getElementById('dv-ai-deposits');
+  const _dDr=document.getElementById('dv-ai-draws');
+  const _dRole=document.getElementById('dv-ai-role');
+  if(_dDep)_dDep.textContent=_aiD.deposits||'—';
+  if(_dDr)_dDr.textContent=_aiD.drawsFrom||'—';
+  if(_dRole)_dRole.textContent=_aiD.aiRole||'—';
+  showView('diamond');
+  updateNav('diamond');
+  openDrawer();
+  document.getElementById(`ph-${id}`).scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+}
+
+function openSubPhase(id){
+  selectedSubPhase=id;
+  const sp=SP_MAP[id];
+  const di=DI_MAP[sp.diamond];
+  const dc=DI[sp.diamond];
+
+  setDrawerHead(`Phase ${sp.num}`,dc.bg,dc.col,sp.name,sp.sub,sp.okrs,sp.ai);
+  document.getElementById('dr-crumb').innerHTML=`<span style="color:var(--txt3)">${di.diamond}</span><span class="dr-crumb-sep">›</span><span>${sp.name}</span>`;
+
+  // AI tasks
+  document.getElementById('sp-ai-tasks').innerHTML=sp.aiTasks.map(t=>`<div class="dr-task"><div class="dr-dot"></div><div><div>${t.t}</div><div class="dr-task-sub">${t.d}</div></div></div>`).join('');
+  // Tools
+  document.getElementById('sp-tools').innerHTML=sp.tools.map(t=>`<div class="dr-tool-row"><span class="dr-tc ${TC[t.cls]||''}">${t.n}</span><span class="dr-tool-desc">${t.d}</span></div>`).join('');
+  // Human tasks
+  document.getElementById('sp-hu-tasks').innerHTML=sp.huTasks.map(t=>`<div class="dr-task"><div class="dr-dot"></div><div><div>${t.t}</div><div class="dr-task-sub">${t.d}</div></div></div>`).join('');
+  // Skills
+  document.getElementById('sp-skills').innerHTML=sp.skills.map(s=>`<span class="dr-sk">${s}</span>`).join('');
+  // Volvo context
+  document.getElementById('sp-volvo').innerHTML=sp.volvo.map(v=>`<div class="dr-mat-item"><span class="dr-mat-badge" style="background:${v.bc};color:${v.bt}">${v.badge}</span>${v.t}</div>`).join('');
+  // Journey
+  const _jmToolEl=document.getElementById('sp-jm-tool');
+  if(_jmToolEl) _jmToolEl.textContent=sp.journey.tool?'Tool → '+sp.journey.tool:'';
+  document.getElementById('sp-jm-act').textContent=sp.journey.activity;
+  document.getElementById('sp-jm-in').textContent=sp.journey.artifactIn;
+  document.getElementById('sp-jm-out').textContent=sp.journey.artifactOut;
+  // forum rendering removed
+  // TBU mini
+  // Recommended tools
+  const recList=document.getElementById('sp-rec-list');
+  if(sp.recTools&&sp.recTools.length>0){
+    document.getElementById('sp-rec-tools').style.display='block';
+    recList.innerHTML=sp.recTools.map(t=>`<div class="dr-rec-row"><span class="dr-rec-badge">${t.n}</span><span class="dr-rec-why">${t.why}</span></div>`).join('');
+  } else {
+    document.getElementById('sp-rec-tools').style.display='none';
+  }
+  document.getElementById('sp-tbu-mini').innerHTML=sp.tbu.map(t=>{
+    const c=t.active?`color:var(--ai-t)`:t.secondary?`color:var(--txt3)`:` opacity:.25;color:var(--txt3)`;
+    return `<div style="font-size:12.5px;${c};font-family:'Volvo Novum',sans-serif">${t.active?'●':t.secondary?'◐':'○'} ${t.label}${t.active?` — primary`:t.secondary?` — secondary`:` — not typical`}</div>`;
+  }).join('');
+
+  // Render principle tags for this sub-phase
+  const spPrincs=SP_PRINCIPLES[sp.id]||[];
+  const tagsEl=document.getElementById('sp-principles-tags');
+  const descEl=document.getElementById('sp-principle-desc');
+  if(tagsEl){
+    tagsEl.innerHTML=spPrincs.map(pid=>{
+      const pr=PRINCIPLES[pid];
+      return `<div style="font-size:12.5px;padding:3px 9px;border-radius:3px;background:${pr.bg};color:${pr.color};border:1px solid ${pr.brd};font-family:'Volvo Novum',sans-serif;cursor:default" title="${pr.desc}">${pr.label}</div>`;
+    }).join('');
+    if(descEl) descEl.textContent=spPrincs.map(pid=>PRINCIPLES[pid].desc).join(' · ');
+  }
+
+  // AI context layer
+  const _aiS=sp.aiCtx||{};
+  const _sDep=document.getElementById('sp-ai-deposits');
+  const _sDr=document.getElementById('sp-ai-draws');
+  const _sRole=document.getElementById('sp-ai-role');
+  const _sSchema=document.getElementById('sp-ai-schema');
+  if(_sDep)_sDep.textContent=_aiS.deposits||'—';
+  if(_sDr)_sDr.textContent=_aiS.drawsFrom||'—';
+  if(_sRole)_sRole.textContent=_aiS.aiRole||'—';
+  if(_sSchema&&_aiS.schema){_sSchema.innerHTML=_aiS.schema.map(f=>`<div class="dr-ai-schema-field">${f}</div>`).join('');}
+  // Track context
+  const _track=window._activeTrack||'new';
+  const _trackEl=document.getElementById('sp-track-ctx');
+  if(_trackEl&&sp.trackContext){
+    const _tc=sp.trackContext[_track]||'';
+    const _tcCls={'new':'dr-track-new','cti':'dr-track-cti','cbi':'dr-track-cbi'}[_track]||'';
+    _trackEl.innerHTML=_tc?`<div class="dr-track-ctx ${_tcCls}"><div class="dr-track-ctx-label">${TRACK_LABELS[_track]||_track}</div><p>${_tc}</p></div>`:'';
+  }
+  showView('subphase');
+  updateNav('subphase');
+  document.getElementById('dr-scroll').scrollTop=0;
+  if(!document.getElementById('drawer').classList.contains('open')) openDrawer();
+}
+
+function updateNav(view){
+  const pos=document.getElementById('dr-nav-pos');
+  const prev=document.getElementById('dr-prev');
+  const next=document.getElementById('dr-next');
+  if(view==='diamond'){
+    const idx=DIAMONDS.findIndex(d=>d.id===selectedDiamond);
+    pos.textContent=`Diamond ${idx+1} of ${DIAMONDS.length}`;
+    prev.disabled=idx===0;
+    next.disabled=idx===DIAMONDS.length-1;
+  } else {
+    const idx=SUB_PHASES.findIndex(s=>s.id===selectedSubPhase);
+    pos.textContent=`Phase ${idx+1} of ${SUB_PHASES.length}`;
+    prev.disabled=idx===0;
+    next.disabled=idx===SUB_PHASES.length-1;
+  }
+}
+
+function navItem(dir){
+  if(currentView==='diamond'){
+    const idx=DIAMONDS.findIndex(d=>d.id===selectedDiamond);
+    const next=idx+dir;
+    if(next>=0&&next<DIAMONDS.length) openDiamond(DIAMONDS[next].id);
+  } else {
+    const idx=SUB_PHASES.findIndex(s=>s.id===selectedSubPhase);
+    const next=idx+dir;
+    if(next>=0&&next<SUB_PHASES.length) openSubPhase(SUB_PHASES[next].id);
+  }
+}
+
+function goBack(){
+  if(selectedDiamond) openDiamond(selectedDiamond);
+}
+
+function openDrawer(){
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('backdrop').classList.add('open');
+  document.getElementById('dr-scroll').scrollTop=0;
+}
+
+function closeDet(){
+  selectedDiamond=null; selectedSubPhase=null;
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('backdrop').classList.remove('open');
+  document.querySelectorAll('.ph').forEach(el=>el.classList.remove('sel'));
+  document.querySelectorAll('.jt-node').forEach(el=>el.classList.remove('sel'));
+  showView('diamond');
+}
+
+buildJourneyThread();
+buildAIContextLane();
+buildTrack();
+</script>
+<div style="position:fixed;bottom:8px;right:12px;font-size:11px;color:var(--txt3);font-family:'Volvo Novum',sans-serif;letter-spacing:.06em;opacity:.5">v.1</div>
+</vcdk-theme-provider>
+</body>
+</html>
